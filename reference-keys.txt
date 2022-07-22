@@ -52,3 +52,6 @@ coming-soon
 workflow
 good-habits
 better-examples
+outline-of-this-manual
+rstudio
+sourcing-data
