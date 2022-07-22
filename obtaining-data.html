@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>R Tools for Quantitative Data Analysis</title>
-  <meta name="description" content="R Tools for Quantitative Data Analysis" />
+  <title>Chapter 3 Obtaining data | R Tools for Quantitative Data Analysis</title>
+  <meta name="description" content="Chapter 3 Obtaining data | R Tools for Quantitative Data Analysis" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="R Tools for Quantitative Data Analysis" />
+  <meta property="og:title" content="Chapter 3 Obtaining data | R Tools for Quantitative Data Analysis" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="R Tools for Quantitative Data Analysis" />
+  <meta name="twitter:title" content="Chapter 3 Obtaining data | R Tools for Quantitative Data Analysis" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="getting-started.html"/>
+<link rel="prev" href="object-types.html"/>
+<link rel="next" href="functions.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -239,33 +239,118 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">R Tools for Quantitative Data Analysis</h1>
-<p class="author"><em>Nick Garvin</em></p>
-<p class="date"><em>2022-06-03</em></p>
-</div>
-<div id="introduction" class="section level1 unnumbered hasAnchor">
-<h1>Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- To do: -->
-<!-- Try to design an exercise that covers all of these topics one by one and does something actually realistic, like formatting and plotting superannuation data or something* -->
-<!-- Generally this could be made more engaging by asking the reader to use the tools for something interesting in each step. -->
-<p><strong>This manual provides the building blocks for using R for data analysis.</strong> When combined in the right ways, these tools can do pretty much anything you can imagine that involves manipulating or modelling data.</p>
-<p><strong>There are chunks of example code that you should copy and run yourself</strong>. The chunks include demonstrations that have little meaning without seeing the output they create. The examples also include many commonly-used functions that are not discussed in the text.</p>
-<p>Everything before section <a href="data-table-and-magrittr.html#data-table-and-magrittr">5</a> is about tools in <strong>base R</strong> (i.e. R without any extra packages installed). Base R is worth understanding well no matter what packages you end up using, because base R has more flexibility than package alternatives. Section <a href="data-table-and-magrittr.html#data-table-and-magrittr">5</a> briefly covers two particularly useful packages – <strong>data.table</strong> and <strong>magrittr</strong>. These are used in section <a href="graphs.html#graphs">6</a> on graphs, which also briefly covers the <strong>ggplot2</strong> graphing package.</p>
-<p><strong>Another great resource for learning R</strong> is Hadley Wickham’s ‘Advanced R’ book (free at <a href="https://adv-r.hadley.nz/index.html" class="uri">https://adv-r.hadley.nz/index.html</a>), and various other Tidyverse resources. The main differences from this manual are:</p>
+<div id="obtaining-data" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Obtaining data<a href="obtaining-data.html#obtaining-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Most R data analysis involves working on data that is read from somewhere, such as a local saved file or an online source. This chapter covers ways of reading data, and where to store them.</p>
+<div id="common-functions-for-importing-data" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Common functions for importing data<a href="obtaining-data.html#common-functions-for-importing-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Common functions for importing data include:</p>
 <ul>
-<li>This manual has more emphasis on working with quantitative data, and less on other R topics related to package development and programming more generally.</li>
-<li>Advanced R assumes use of Hadley Wickham’s Tidyverse set of packages. Many people prefer other approaches (discussed in section <a href="data-table-and-magrittr.html#packages-why-not-dplyr">5.5</a>). This manual is relevant whether you’re using Tidyverse packages or not.</li>
+<li><u>read.table()</u> from base R. Reads most types of text files.</li>
+<li><u>read.csv()</u> from base R. A version of read.table() specifically for csv files.</li>
+<li><u>read.xlsx()</u> from the <u>openxlsx package</u>. Reads a worksheet from an excel file, including from an online source (i.e. the location is a website).</li>
+<li><u>fread()</u> from the <u>data.table package</u>. Reads a csv file (and some other file types) in as a data table, much faster than read.csv(). Can read from a local file or an online source.</li>
+<li><u>read_csv()</u> from the <u>readr package</u>, part of Tidyverse. Reads a csv file in as a tibble.</li>
+<li><u>read_excel()</u> from the <u>readxl package</u>, part of Tidyverse. Reads a worksheet of an excel file, in as a tibble. For online sources, <code>openxlsx::read.xlsx()</code> tends to be easier.</li>
 </ul>
+<p><b>To save data</b> from your R session to a local location in a common file format, use the functions above but replace <code>read</code> with <code>write</code>, for example, <code>write.csv()</code>.</p>
+<p><b>To save R objects for use in a later R session</b>, read and write them as a ‘.rds’ file type using <code>readRDS</code> and <code>writeRDS</code>.</p>
+</div>
+<div id="where-to-save-data" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Where to save data<a href="obtaining-data.html#where-to-save-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are three options for specifying where to save data:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Bad</strong>: Use <code>setwd()</code> to set a working directory for your R session. R will then treat addresses as subfolders within that directory, so the full address does not need to be written.
+<ul>
+<li>This is generally discouraged because it gives your script an external dependency that reduces the flexibility of your work. For example, others will probably not be able to run your code on their machine.</li>
+</ul></li>
+<li><strong>Good</strong>: Use an <u>RStudio project</u>, which bundles related script/s and files in a self-contained folder that can be moved and run anywhere. R treats the project folder as the working directory regardless of where the project folder is put. R projects are an RStudio feature and are discussed further in section <a href="obtaining-data.html#import-data-projects">3.3</a>.</li>
+<li><strong>Sometimes necessary</strong>: write the full filepath of the location. This is required if you need to write to a specific location on your machine/network.</li>
+</ol>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="obtaining-data.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Reading and writing data from local location</span></span>
+<span id="cb17-2"><a href="obtaining-data.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Gets the location of your script. Just so the example works in this setting.</span></span>
+<span id="cb17-3"><a href="obtaining-data.html#cb17-3" aria-hidden="true" tabindex="-1"></a>local_folder <span class="ot">&lt;-</span> <span class="fu">dirname</span>(rstudioapi<span class="sc">::</span><span class="fu">getSourceEditorContext</span>()<span class="sc">$</span>path)</span>
+<span id="cb17-4"><a href="obtaining-data.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the iris dataset as a local csv file. Double click the saved file to check it&#39;s</span></span>
+<span id="cb17-5"><a href="obtaining-data.html#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   been written.</span></span>
+<span id="cb17-6"><a href="obtaining-data.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(iris, <span class="at">file=</span><span class="fu">paste0</span>(local_folder, <span class="st">&#39;/iris_dataset.csv&#39;</span>), <span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb17-7"><a href="obtaining-data.html#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Read it back into your R session</span></span>
+<span id="cb17-8"><a href="obtaining-data.html#cb17-8" aria-hidden="true" tabindex="-1"></a>iris_dataset <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">paste0</span>(local_folder, <span class="st">&#39;/iris_dataset.csv&#39;</span>))</span>
+<span id="cb17-9"><a href="obtaining-data.html#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(iris_dataset)</span>
+<span id="cb17-10"><a href="obtaining-data.html#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># (Remove the saved file jsut to clean up)</span></span>
+<span id="cb17-11"><a href="obtaining-data.html#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">file.remove</span>(<span class="fu">paste0</span>(local_folder, <span class="st">&#39;/iris_dataset.csv&#39;</span>))</span>
+<span id="cb17-12"><a href="obtaining-data.html#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="do">### Reading data from online</span></span>
+<span id="cb17-13"><a href="obtaining-data.html#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment and run next line if openxlsx package has never been installed</span></span>
+<span id="cb17-14"><a href="obtaining-data.html#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&#39;openxlsx&#39;)</span></span>
+<span id="cb17-15"><a href="obtaining-data.html#cb17-15" aria-hidden="true" tabindex="-1"></a>mysuper_data_locn <span class="ot">&lt;-</span></span>
+<span id="cb17-16"><a href="obtaining-data.html#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&#39;https://www.apra.gov.au/sites/default/files/2022-03/&#39;</span>,</span>
+<span id="cb17-17"><a href="obtaining-data.html#cb17-17" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;Quarterly%20MySuper%20statistics%20September%202019%20-%20December%202021.xlsx&#39;</span>)</span>
+<span id="cb17-18"><a href="obtaining-data.html#cb17-18" aria-hidden="true" tabindex="-1"></a>sheet_name <span class="ot">&lt;-</span> <span class="st">&#39;Table 1a&#39;</span></span>
+<span id="cb17-19"><a href="obtaining-data.html#cb17-19" aria-hidden="true" tabindex="-1"></a>mysuper_data <span class="ot">&lt;-</span> openxlsx<span class="sc">::</span><span class="fu">read.xlsx</span>(<span class="at">xlsxFile=</span>mysuper_data_locn, <span class="at">sheet=</span>sheet_name, </span>
+<span id="cb17-20"><a href="obtaining-data.html#cb17-20" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">startRow=</span><span class="dv">4</span>)</span>
+<span id="cb17-21"><a href="obtaining-data.html#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="co"># These data need to be cleaned (e.g. rows removed, columns renamed) before they&#39;re</span></span>
+<span id="cb17-22"><a href="obtaining-data.html#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   usable. But just look at a bit of it to see that the data pull worked.</span></span>
+<span id="cb17-23"><a href="obtaining-data.html#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mysuper_data)</span>
+<span id="cb17-24"><a href="obtaining-data.html#cb17-24" aria-hidden="true" tabindex="-1"></a>mysuper_data[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+</div>
+<div id="import-data-projects" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Setting up an RStudio project<a href="obtaining-data.html#import-data-projects" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>RStudio projects are suitable for all coding tasks. The project creates a folder for containing the scripts and other files used for that task, such as locally stored datasets. Inside the folder is a .Rproj file that coordinates the project’s files.</p>
+<p>To create an RStudio project:</p>
+<ol style="list-style-type: decimal">
+<li>Open RStudio, click ‘File’, ‘New Project’, ‘New Directory’, then ‘New Project’. Write a name for the project folder (‘Directory name’), then click ‘Browse’ and pick a folder to put the project folder in (anywhere is fine), then click ‘Create Project’.</li>
+<li>The empty project wll open, and the ‘Files’ tab in the ‘Files, Plots, Packages, …’ pane will show no files in the project folder aside from the ‘.Rproj’ file you just created. In a sense this file coordinates the other files in the project.</li>
+<li>Click ctrl + shift + N to open a new script, then click ‘File’ then ‘Save As’ to save it into your project folder and give it a name. It will then appear in the ‘Files’ window.</li>
+<li>The project folder is now the working directory to which any R scripts in that folder reference.</li>
+<li>Move any other files or scripts that are for that task into the project folder.</li>
+</ol>
+<p>The following code works fine in a script in an RStudio project. It puts the data in the project folder then reads it back from the project folder.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="obtaining-data.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Don&#39;t run this code unless you&#39;re in an RStudio project. Not sure where it will put</span></span>
+<span id="cb18-2"><a href="obtaining-data.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">###   the csv file otherwise.</span></span>
+<span id="cb18-3"><a href="obtaining-data.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(iris, <span class="at">file=</span><span class="st">&#39;iris_dataset.csv&#39;</span>, <span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb18-4"><a href="obtaining-data.html#cb18-4" aria-hidden="true" tabindex="-1"></a>iris_dataset <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;iris_dataset.csv&#39;</span>)</span>
+<span id="cb18-5"><a href="obtaining-data.html#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># To delete the file you just created, uncomment and run the next line:</span></span>
+<span id="cb18-6"><a href="obtaining-data.html#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#file.remove(&#39;iris_dataset.csv&#39;)</span></span></code></pre></div>
+<p><strong>A key benefit of RStudio projects</strong> is that it keeps your task self contained. The project will keep working if you move it, including giving it to someone else.</p>
+<div id="when-to-use-packages-instead-of-projects" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> When to use packages instead of projects<a href="obtaining-data.html#when-to-use-packages-instead-of-projects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Creating and working in a package is an alternative to working in a project. A package is a collection of functions intended to be easily shared with others, stored in a self-contained bundle like a project. Packages are useful when the point of your work is to allow others to use your code without having to think about how your code works.</p>
+<p>Keep the option in mind, but as a data analyst, you’ll probably find that most of your work does not fit in that category. Packages are a bit more complicated to set up and use, and impose some requirements on what files and scripts you use, and where you put them. So unless you want the practice, projects are in many cases a more suitable option.</p>
+<p>Sometimes it’s important that the analyst that runs the code has reasonable familiarity with how the code works, in which case a package is unsuitable. A common example is code that comprises a model that has assumptions that would be misapplied if the user does not understand them. In these cases the primary benefit of developing a package – preventing the user from having to deal with the underlying code – turns into a cost.</p>
+<!--
 
+Section heading: Automating data sourcing
+
+If the data being sourced get updated -- e.g. when new time periods become available -- and the coding outputs warrant updating in response, the code should point directly to that source. In other words, use R to grab the data from its source rather than downloading it manually. 
+
+Automating data updates in this ways requires a couple of things:
+
+* The format of the source data does not change with the updates. It will be difficult to make your code robust to updates if this isn't the case.
+* The code is flexible enough to continue to work as intended as the source data get updated. This requires forward thinking about how the processes would be affected by changes to the data.
+    * *Careful*: If something does not work as intended, your results are likely to inherit mistakes and you won't necessarily notice. You can incorporate testing, or write your code to intentionally stop running when it encounters these situations, to prevent this from happening.
+
+
+In other cases, you could manually save a copy of the source data locally and write your code to read that local version. Where you can, <u>save your data in simple text files (e.g. csv)</u> rather than in Excel files. Excel files take up more space and have unnecessary complexity that can make things more difficult.
+
+I often use a middle ground process:
+
+1. Write a setting into your code that allows you to specify whether you want to import from the raw data.
+2. When this setting it switched on, have your code import the source data, potentially do some formatting, and then save it locally.
+3. When the setting is switched off, have your code read from the locally saved dataset.
+4. Switch the setting on each time you want to get the latest update of the source data. 
+5. Have the setting switched off every other time you run your code.
+
+-->
+
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="getting-started.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="object-types.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="functions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

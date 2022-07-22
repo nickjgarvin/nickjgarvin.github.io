@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Getting started | R Tools for Quantitative Data Analysis</title>
+  <meta name="description" content="Chapter 1 Getting started | R Tools for Quantitative Data Analysis" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Getting started | R Tools for Quantitative Data Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Getting started | R Tools for Quantitative Data Analysis" />
+  
+  
+  
+
+<meta name="author" content="Nick Garvin" />
+
+
+<meta name="date" content="2022-06-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="object-types.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://glowing-blancmange-f08364.netlify.app/index.html">R Tools for Quantitative Data Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#getting-started-what-is"><i class="fa fa-check"></i><b>1.1</b> What is a line of R code?</a></li>
+<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#coding-style"><i class="fa fa-check"></i><b>1.2</b> Coding style</a></li>
+<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#getting-started-packages"><i class="fa fa-check"></i><b>1.3</b> Base R and installing packages</a></li>
+<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#example-code-to-play-with"><i class="fa fa-check"></i><b>1.4</b> Example code to play with</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="object-types.html"><a href="object-types.html"><i class="fa fa-check"></i><b>2</b> Types of data objects</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="object-types.html"><a href="object-types.html#vectors"><i class="fa fa-check"></i><b>2.1</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="object-types.html"><a href="object-types.html#numeric-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Numeric vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="object-types.html"><a href="object-types.html#character-vectors"><i class="fa fa-check"></i><b>2.1.2</b> Character vectors</a></li>
+<li class="chapter" data-level="2.1.3" data-path="object-types.html"><a href="object-types.html#factor-vectors"><i class="fa fa-check"></i><b>2.1.3</b> Factor vectors</a></li>
+<li class="chapter" data-level="2.1.4" data-path="object-types.html"><a href="object-types.html#logical-vectors"><i class="fa fa-check"></i><b>2.1.4</b> Logical vectors</a></li>
+<li class="chapter" data-level="2.1.5" data-path="object-types.html"><a href="object-types.html#date-vectors"><i class="fa fa-check"></i><b>2.1.5</b> Date vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="object-types.html"><a href="object-types.html#vector-operations-and-indexing"><i class="fa fa-check"></i><b>2.2</b> Vector operations and indexing</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="object-types.html"><a href="object-types.html#object-types-vector-wise"><i class="fa fa-check"></i><b>2.2.1</b> Vector-wise operations and recycling</a></li>
+<li class="chapter" data-level="2.2.2" data-path="object-types.html"><a href="object-types.html#named-vector-elements"><i class="fa fa-check"></i><b>2.2.2</b> Named vector elements</a></li>
+<li class="chapter" data-level="2.2.3" data-path="object-types.html"><a href="object-types.html#how-to-index-vectors"><i class="fa fa-check"></i><b>2.2.3</b> How to index vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="object-types.html"><a href="object-types.html#arrays"><i class="fa fa-check"></i><b>2.3</b> Arrays</a></li>
+<li class="chapter" data-level="2.4" data-path="object-types.html"><a href="object-types.html#data-frames"><i class="fa fa-check"></i><b>2.4</b> Data frames</a></li>
+<li class="chapter" data-level="2.5" data-path="object-types.html"><a href="object-types.html#lists"><i class="fa fa-check"></i><b>2.5</b> Lists</a></li>
+<li class="chapter" data-level="2.6" data-path="object-types.html"><a href="object-types.html#if-statements-and-for-loops"><i class="fa fa-check"></i><b>2.6</b> ‘If’ statements and ‘for’ loops</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="object-types.html"><a href="object-types.html#if-statements"><i class="fa fa-check"></i><b>2.6.1</b> If statements</a></li>
+<li class="chapter" data-level="2.6.2" data-path="object-types.html"><a href="object-types.html#object-types-loops"><i class="fa fa-check"></i><b>2.6.2</b> For loops</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="object-types.html"><a href="object-types.html#recap"><i class="fa fa-check"></i><b>2.7</b> Recap</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="obtaining-data.html"><a href="obtaining-data.html"><i class="fa fa-check"></i><b>3</b> Obtaining data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="obtaining-data.html"><a href="obtaining-data.html#common-functions-for-importing-data"><i class="fa fa-check"></i><b>3.1</b> Common functions for importing data</a></li>
+<li class="chapter" data-level="3.2" data-path="obtaining-data.html"><a href="obtaining-data.html#where-to-save-data"><i class="fa fa-check"></i><b>3.2</b> Where to save data</a></li>
+<li class="chapter" data-level="3.3" data-path="obtaining-data.html"><a href="obtaining-data.html#import-data-projects"><i class="fa fa-check"></i><b>3.3</b> Setting up an RStudio project</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="obtaining-data.html"><a href="obtaining-data.html#when-to-use-packages-instead-of-projects"><i class="fa fa-check"></i><b>3.3.1</b> When to use packages instead of projects</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>4</b> Functions (and environments)</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="functions.html"><a href="functions.html#functions-user-defined-functions"><i class="fa fa-check"></i><b>4.1</b> How to write functions</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="functions.html"><a href="functions.html#why-put-your-operations-inside-user-defined-functions"><i class="fa fa-check"></i><b>4.1.1</b> Why put your operations inside user-defined functions?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="functions.html"><a href="functions.html#functions-environments"><i class="fa fa-check"></i><b>4.2</b> Environments</a></li>
+<li class="chapter" data-level="4.3" data-path="functions.html"><a href="functions.html#functions-apply"><i class="fa fa-check"></i><b>4.3</b> Applying functions repeatedly</a></li>
+<li class="chapter" data-level="4.4" data-path="functions.html"><a href="functions.html#debugging-user-defined-functions"><i class="fa fa-check"></i><b>4.4</b> Debugging user-defined functions</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="functions.html"><a href="functions.html#the-browser-function"><i class="fa fa-check"></i><b>4.4.1</b> The browser() function</a></li>
+<li class="chapter" data-level="4.4.2" data-path="functions.html"><a href="functions.html#the-errorrecover-setting"><i class="fa fa-check"></i><b>4.4.2</b> The error=recover setting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html"><i class="fa fa-check"></i><b>5</b> The data.table and magrittr packages</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#first-load-the-two-packages"><i class="fa fa-check"></i><b>5.1</b> First load the two packages</a></li>
+<li class="chapter" data-level="5.2" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#the-magrittr-package-aka-pipes"><i class="fa fa-check"></i><b>5.2</b> The magrittr package, AKA pipes</a></li>
+<li class="chapter" data-level="5.3" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#the-data.table-package"><i class="fa fa-check"></i><b>5.3</b> The data.table package</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-index-shortcuts"><i class="fa fa-check"></i><b>5.3.1</b> Row and column indexing utilises shortcuts</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-assignment"><i class="fa fa-check"></i><b>5.3.2</b> The in-place assignment operator <code>:=</code></a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-by"><i class="fa fa-check"></i><b>5.3.3</b> Operations <u>by groups</u> of rows</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-functions"><i class="fa fa-check"></i><b>5.3.4</b> Handy data.table functions</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-magrittr"><i class="fa fa-check"></i><b>5.4</b> Combining data.table and magrittr</a></li>
+<li class="chapter" data-level="5.5" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#packages-why-not-dplyr"><i class="fa fa-check"></i><b>5.5</b> Why data.table rather than dplyr here</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="graphs.html"><a href="graphs.html"><i class="fa fa-check"></i><b>6</b> Graphs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="graphs.html"><a href="graphs.html#base-r-or-ggplot"><i class="fa fa-check"></i><b>6.1</b> Base R or ggplot?</a></li>
+<li class="chapter" data-level="6.2" data-path="graphs.html"><a href="graphs.html#base-r-graph-examples"><i class="fa fa-check"></i><b>6.2</b> Base R graph examples</a></li>
+<li class="chapter" data-level="6.3" data-path="graphs.html"><a href="graphs.html#ggplot-graph-examples"><i class="fa fa-check"></i><b>6.3</b> ggplot graph examples</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="coming-soon.html"><a href="coming-soon.html"><i class="fa fa-check"></i><b>7</b> Coming soon</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="coming-soon.html"><a href="coming-soon.html#workflow"><i class="fa fa-check"></i><b>7.1</b> Workflow</a></li>
+<li class="chapter" data-level="7.2" data-path="coming-soon.html"><a href="coming-soon.html#good-habits"><i class="fa fa-check"></i><b>7.2</b> Good habits</a></li>
+<li class="chapter" data-level="7.3" data-path="coming-soon.html"><a href="coming-soon.html#better-examples"><i class="fa fa-check"></i><b>7.3</b> Better examples</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Tools for Quantitative Data Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="getting-started" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Getting started<a href="getting-started.html#getting-started" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>There are two places to write R code</strong>:</p>
+<ol style="list-style-type: decimal">
+<li><u>The R console</u>. This is where code is run. If you write directly into the console, each time you hit <code>enter</code> it will run what you wrote. If you open R without RStudio, R will just show the console. Try it.</li>
+<li><u>Scripts</u>. An R script is basically a text file (but, if using RStudio, with a .R extension). This is where code is saved. You send whole scripts or bits of them to the console for execution.</li>
+</ol>
+<p><b>Use RStudio</b>, which makes writing, running and saving scripts easy. Although R is open source, RStudio is commercial software, but the standard version is free of charge, and if it doesn’t stay that way someone will hopefully develop an open-source alternative. Some small parts of this document are specific to using R in RStudio.</p>
+<p><strong>To get started with RStudio</strong>:</p>
+<ol style="list-style-type: decimal">
+<li>Download and install R and RStudio (for windows, from here <a href="https://cran.rstudio.com/" class="uri">https://cran.rstudio.com/</a> and here <a href="https://www.rstudio.com/products/rstudio/download/#download" class="uri">https://www.rstudio.com/products/rstudio/download/#download</a>), and open RStudio.</li>
+<li>Click “File”, then “New file”, then “R Script”.</li>
+<li>Write code into the script.</li>
+<li>Run code by highlighting it and typing <code>ctrl+enter</code>, or run a line by hitting <code>ctrl+enter</code> when your cursor is on that line, or run the whole script down to your cursor by typing <code>ctrl+alt+b</code>.</li>
+<li>Save the script if you want to keep it.</li>
+</ol>
+<p><strong>TIP: save your R scripts, not your R ‘sessions’</strong> (i.e. the collection of data objects your script has created). Rather than opening a saved session, it’s better to recreate it by running your saved script. Then you have the R objects you need <u>and</u> a record of how they were created <u>and</u> the ability to reproduce them.</p>
+<p><strong>TIP: regularly run your whole script, to check everything still works.</strong> Before each re-run, <u>clear your session</u> to make sure it’s starting fresh. You can clear your session by typing <code>ctr + shift + F10</code>, but RStudio first needs to have some settings adjusted. This is common practice and needs to be done due to <a href="https://community.rstudio.com/t/defaults-of-saving-and-restoring-workspace/939">legacy issues</a>.</p>
+<ol style="list-style-type: decimal">
+<li>Click “Tools, then”Global Options”.</li>
+<li>In “R General” and “Basic”, under “Workspace”, make sure “Restore .RData into workspace at startup” is unticked, and “Save workspace to .RData on exit:” is set to “Never”.</li>
+<li>Click “Apply”.</li>
+</ol>
+<p><strong>Other commonly used RStudio functionality</strong>:</p>
+<ul>
+<li><u>RStudio projects</u> are useful for grouping files that belong to the same piece of work, such as scripts that relate to each other, input files read by the script/s (e.g. datasets stored locally), and outputs. It’s good habit to always do your work in an RStudio project. These are discussed in section <a href="obtaining-data.html#import-data-projects">3.3</a></li>
+<li><u>R Markdown</u> is great for presenting code/output/text to someone that will be more interested in reading the content than running the code themselves. For example, this document was produced in R Markdown. But <u>only use it for these purposes</u> – it wasn’t intended to be used for general coding, which standard scripts are better for.</li>
+</ul>
+<div id="getting-started-what-is" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> What is a line of R code?<a href="getting-started.html#getting-started-what-is" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>These are things worth knowing before you start:</p>
+<ul>
+<li><strong>Comments</strong>: R ignores any line that starts with <code>#</code>, regardless of what is after it. If <code>#</code> appears partway through a line, everything after the <code>#</code> is ignored.</li>
+<li><strong>Error messages</strong>: When the console shows a message starting with ‘Error’, the piece of code that produced that message did not run. When the message starts with ‘Warning’, the code did run, but something unintended may have happened. The information in this manual should help you to understand the language used in these messages.</li>
+<li><strong>R is case sensitive</strong>.</li>
+<li><strong>R uses sequential execution</strong>. R runs code one line at a time. The results of one line are produced, and ready to use, before the next line is run. Lines are separated by typing <code>enter</code>.
+<ul>
+<li><u>Splitting lines</u>: R reads multiple lines as one if the first line(s) have an unfinished operation, such as <code>(</code> without <code>)</code>, or <code>+</code> with nothing afterward until the next line.</li>
+<li><u>Pipes</u>: The ‘pipe’ operator <code>%&gt;%</code>, from the magrittr package, slightly modifies the concept of ‘a line of R code’. This is discussed in section <a href="data-table-and-magrittr.html#data-table-and-magrittr">5</a>.<br />
+</li>
+</ul></li>
+<li><strong>Assignment</strong> (<code>&lt;-</code>): Most lines of R code are an assignment, to create or modify a data object.
+<ul>
+<li>Assignment can create a new object. For example, <code>y &lt;- 3</code> creates a new object called <code>y</code>, containing <code>3</code>.</li>
+<li>The assignment operator <code>&lt;-</code> gives the RHS data object (e.g. <code>3</code>) the name (AKA symbol) on the LHS (e.g. <code>y</code>), and stores it in your session’s ‘environment’. If an object of that name already existed, it is over-written.
+<ul>
+<li>Have the ‘Environment’ pane in RStudio open when you run an assignment, and you will see the object appear when it is assigned.</li>
+</ul></li>
+<li>Assignment can also modify an existing object. To do this, instead or having just an object name to the left of <code>&lt;-</code>, ‘index’ an existing object to refer to a specific component of it. Indexing is discussed more shortly.</li>
+<li>The operation on the right of <code>&lt;-</code> is done before the name is assigned. So, for example, <code>x &lt;- x + 1</code> does not cause a contradiction; it uses the pre-existing <code>x</code> on the right then creates the new <code>x</code> on the left.</li>
+</ul></li>
+<li><strong>Object names</strong>: names can be any text without spaces, but cannot start with numbers. Most people use underscores instead of spaces. Some old dogs use a dot.</li>
+<li><strong>Operations</strong>: an operation can be run without an assignment, which will usually just display the result of that operation in the console.</li>
+</ul>
+</div>
+<div id="coding-style" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Coding style<a href="getting-started.html#coding-style" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Make your code easily readable, for your later self and for others. Some tips:</p>
+<ul>
+<li><u>Keep each line of your script within 90 characters</u>. Nobody likes having to scroll left and right to look at code. Achieve this by splitting your lines as mentioned in section <a href="getting-started.html#getting-started-what-is">1.1</a>. Some use 80 characters.</li>
+<li><u>Liberally comment your code</u>. It’s also usually better to describe what you’re doing, rather than how you’re doing it. When the reader knows the ‘what’, they can usually get the ‘how’ from the code.</li>
+<li><u>Follow a style guide</u>, such as Hadley Wickham’s (<a href="http://adv-r.had.co.nz/Style.html" class="uri">http://adv-r.had.co.nz/Style.html</a>) or whatever you find and like. The important thing is that your code is readable, which this will help with.</li>
+<li><u>Spend time cleaning your code</u>, after you’ve first got it working, if the code is worth keeping. Code is clean when it achieves its purpose in close to as few steps as possible, and is neatly laid and out and commented. If your code isn’t clean, it’s reasonably likely to have mistakes that haven’t been noticed.</li>
+</ul>
+</div>
+<div id="getting-started-packages" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Base R and installing packages<a href="getting-started.html#getting-started-packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><b>Base R</b> refers to R without any additional packages installed, which is what you get when you first install R. This document focuses mostly on base R, which can do a vast range of things. Packages build on base R to add functionality, but rarely do anything related to data manipulation that cannot be done in base R. Rather, they’re usually intended to make doing that thing easier, by reducing the amount of code required or making the operations faster.</p>
+<p><b>To use a package</b>:</p>
+<ol style="list-style-type: decimal">
+<li><u>Install</u> it on your computer by running <code>install.packages('&lt;package name&gt;')</code> in the console, for example <code>install.packages('data.table')</code>. This only needs to be done once.</li>
+<li><u>Load</u> it each time you open a new R session, by running <code>library(&lt;package name&gt;)</code>, for example <code>library(data.table)</code>. Write it into the top of the script, for visibility. This brings its functions into your ‘namespace’ environment and makes them available to call.
+<ul>
+<li>Alternatively, you can call a function from a package that is installed but not loaded, by typing the package name with <code>::</code>. For example, <code>data.table::melt()</code> calls the <code>melt()</code> function without data.table needing to be loaded. This avoids bringing the package’s functions into the namespace environment and can help prevent function-name duplication.</li>
+</ul></li>
+</ol>
+<p><strong>Careful</strong>: Using additional packages does some bring costs, like package dependencies, potential function-name duplication, and small overheads. Don’t let that stop you. Just do this: only start relying on an additional package if it provides a noticeable benefit over what you have already. Also, if your code is running critical processes, make sure you’re managing these risks.</p>
+<p>A few widely used packages can change how the R syntax looks, so if after reading sections <a href="getting-started.html#getting-started">1</a> and <a href="object-types.html#object-types">2</a>, you see R code that still looks foreign to you, this is probably the reason. Section <a href="data-table-and-magrittr.html#data-table-and-magrittr">5</a> covers that.</p>
+</div>
+<div id="example-code-to-play-with" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Example code to play with<a href="getting-started.html#example-code-to-play-with" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="getting-started.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Generate some mock variables and run a simple regression on them.</span></span>
+<span id="cb1-2"><a href="getting-started.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set your desired sample size</span></span>
+<span id="cb1-3"><a href="getting-started.html#cb1-3" aria-hidden="true" tabindex="-1"></a>samp_size <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb1-4"><a href="getting-started.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the regression parameters</span></span>
+<span id="cb1-5"><a href="getting-started.html#cb1-5" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.75</span></span>
+<span id="cb1-6"><a href="getting-started.html#cb1-6" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb1-7"><a href="getting-started.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an x variable vector, as a sequence from 1 to the sample size</span></span>
+<span id="cb1-8"><a href="getting-started.html#cb1-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, samp_size)</span>
+<span id="cb1-9"><a href="getting-started.html#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Do the same thing another way (the operator &#39;:&#39; creates a sequence of integers)</span></span>
+<span id="cb1-10"><a href="getting-started.html#cb1-10" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>samp_size</span>
+<span id="cb1-11"><a href="getting-started.html#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Show that they&#39;re the same (an example of operation without assignment).</span></span>
+<span id="cb1-12"><a href="getting-started.html#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(x, x2)</span>
+<span id="cb1-13"><a href="getting-started.html#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the unneeded one.</span></span>
+<span id="cb1-14"><a href="getting-started.html#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x2)</span>
+<span id="cb1-15"><a href="getting-started.html#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the regression residuals by randomly selecting from a normal distribution</span></span>
+<span id="cb1-16"><a href="getting-started.html#cb1-16" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span>samp_size)</span>
+<span id="cb1-17"><a href="getting-started.html#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the chosen parameters</span></span>
+<span id="cb1-18"><a href="getting-started.html#cb1-18" aria-hidden="true" tabindex="-1"></a>alpha</span>
+<span id="cb1-19"><a href="getting-started.html#cb1-19" aria-hidden="true" tabindex="-1"></a>beta</span>
+<span id="cb1-20"><a href="getting-started.html#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the x variables and residuals. Just look at the first few values.</span></span>
+<span id="cb1-21"><a href="getting-started.html#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(x)  <span class="co"># alternatively the tail() function shows the last few values. </span></span>
+<span id="cb1-22"><a href="getting-started.html#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(e)</span>
+<span id="cb1-23"><a href="getting-started.html#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the left-hand-side y variable from the components already specified.</span></span>
+<span id="cb1-24"><a href="getting-started.html#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># The assignment is unnecessarily split over two lines, for illustration.</span></span>
+<span id="cb1-25"><a href="getting-started.html#cb1-25" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> alpha <span class="sc">+</span> </span>
+<span id="cb1-26"><a href="getting-started.html#cb1-26" aria-hidden="true" tabindex="-1"></a>  (beta <span class="sc">*</span> x) <span class="sc">+</span> e</span>
+<span id="cb1-27"><a href="getting-started.html#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress the y variable on the x variable. lm() is the standard function for regression.</span></span>
+<span id="cb1-28"><a href="getting-started.html#cb1-28" aria-hidden="true" tabindex="-1"></a>reg_output <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb1-29"><a href="getting-started.html#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Report the output from regression</span></span>
+<span id="cb1-30"><a href="getting-started.html#cb1-30" aria-hidden="true" tabindex="-1"></a>reg_output</span>
+<span id="cb1-31"><a href="getting-started.html#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg_output)</span>
+<span id="cb1-32"><a href="getting-started.html#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="getting-started.html#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="do">### Exercise for the interested:</span></span>
+<span id="cb1-34"><a href="getting-started.html#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># - Rerun the code a bunch of times, changing the sample size (e.g. 10, 100, 10 000, etc).</span></span>
+<span id="cb1-35"><a href="getting-started.html#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co">#   (Even with the same sample size the results will change, because rnorm gives different</span></span>
+<span id="cb1-36"><a href="getting-started.html#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">#   values each time.)</span></span>
+<span id="cb1-37"><a href="getting-started.html#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># - See if you notice a pattern between the sample size, and how close your specified </span></span>
+<span id="cb1-38"><a href="getting-started.html#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co">#   alpha and beta parameters are to the regression coefficients. </span></span>
+<span id="cb1-39"><a href="getting-started.html#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># - This pattern is a &#39;law of large numbers&#39; at work.</span></span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="object-types.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

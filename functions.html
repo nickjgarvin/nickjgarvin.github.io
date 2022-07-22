@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Functions (and environments) | R Tools for Quantitative Data Analysis</title>
+  <meta name="description" content="Chapter 4 Functions (and environments) | R Tools for Quantitative Data Analysis" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Functions (and environments) | R Tools for Quantitative Data Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Functions (and environments) | R Tools for Quantitative Data Analysis" />
+  
+  
+  
+
+<meta name="author" content="Nick Garvin" />
+
+
+<meta name="date" content="2022-06-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="obtaining-data.html"/>
+<link rel="next" href="data-table-and-magrittr.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://glowing-blancmange-f08364.netlify.app/index.html">R Tools for Quantitative Data Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#getting-started-what-is"><i class="fa fa-check"></i><b>1.1</b> What is a line of R code?</a></li>
+<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#coding-style"><i class="fa fa-check"></i><b>1.2</b> Coding style</a></li>
+<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#getting-started-packages"><i class="fa fa-check"></i><b>1.3</b> Base R and installing packages</a></li>
+<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#example-code-to-play-with"><i class="fa fa-check"></i><b>1.4</b> Example code to play with</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="object-types.html"><a href="object-types.html"><i class="fa fa-check"></i><b>2</b> Types of data objects</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="object-types.html"><a href="object-types.html#vectors"><i class="fa fa-check"></i><b>2.1</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="object-types.html"><a href="object-types.html#numeric-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Numeric vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="object-types.html"><a href="object-types.html#character-vectors"><i class="fa fa-check"></i><b>2.1.2</b> Character vectors</a></li>
+<li class="chapter" data-level="2.1.3" data-path="object-types.html"><a href="object-types.html#factor-vectors"><i class="fa fa-check"></i><b>2.1.3</b> Factor vectors</a></li>
+<li class="chapter" data-level="2.1.4" data-path="object-types.html"><a href="object-types.html#logical-vectors"><i class="fa fa-check"></i><b>2.1.4</b> Logical vectors</a></li>
+<li class="chapter" data-level="2.1.5" data-path="object-types.html"><a href="object-types.html#date-vectors"><i class="fa fa-check"></i><b>2.1.5</b> Date vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="object-types.html"><a href="object-types.html#vector-operations-and-indexing"><i class="fa fa-check"></i><b>2.2</b> Vector operations and indexing</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="object-types.html"><a href="object-types.html#object-types-vector-wise"><i class="fa fa-check"></i><b>2.2.1</b> Vector-wise operations and recycling</a></li>
+<li class="chapter" data-level="2.2.2" data-path="object-types.html"><a href="object-types.html#named-vector-elements"><i class="fa fa-check"></i><b>2.2.2</b> Named vector elements</a></li>
+<li class="chapter" data-level="2.2.3" data-path="object-types.html"><a href="object-types.html#how-to-index-vectors"><i class="fa fa-check"></i><b>2.2.3</b> How to index vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="object-types.html"><a href="object-types.html#arrays"><i class="fa fa-check"></i><b>2.3</b> Arrays</a></li>
+<li class="chapter" data-level="2.4" data-path="object-types.html"><a href="object-types.html#data-frames"><i class="fa fa-check"></i><b>2.4</b> Data frames</a></li>
+<li class="chapter" data-level="2.5" data-path="object-types.html"><a href="object-types.html#lists"><i class="fa fa-check"></i><b>2.5</b> Lists</a></li>
+<li class="chapter" data-level="2.6" data-path="object-types.html"><a href="object-types.html#if-statements-and-for-loops"><i class="fa fa-check"></i><b>2.6</b> ‘If’ statements and ‘for’ loops</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="object-types.html"><a href="object-types.html#if-statements"><i class="fa fa-check"></i><b>2.6.1</b> If statements</a></li>
+<li class="chapter" data-level="2.6.2" data-path="object-types.html"><a href="object-types.html#object-types-loops"><i class="fa fa-check"></i><b>2.6.2</b> For loops</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="object-types.html"><a href="object-types.html#recap"><i class="fa fa-check"></i><b>2.7</b> Recap</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="obtaining-data.html"><a href="obtaining-data.html"><i class="fa fa-check"></i><b>3</b> Obtaining data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="obtaining-data.html"><a href="obtaining-data.html#common-functions-for-importing-data"><i class="fa fa-check"></i><b>3.1</b> Common functions for importing data</a></li>
+<li class="chapter" data-level="3.2" data-path="obtaining-data.html"><a href="obtaining-data.html#where-to-save-data"><i class="fa fa-check"></i><b>3.2</b> Where to save data</a></li>
+<li class="chapter" data-level="3.3" data-path="obtaining-data.html"><a href="obtaining-data.html#import-data-projects"><i class="fa fa-check"></i><b>3.3</b> Setting up an RStudio project</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="obtaining-data.html"><a href="obtaining-data.html#when-to-use-packages-instead-of-projects"><i class="fa fa-check"></i><b>3.3.1</b> When to use packages instead of projects</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>4</b> Functions (and environments)</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="functions.html"><a href="functions.html#functions-user-defined-functions"><i class="fa fa-check"></i><b>4.1</b> How to write functions</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="functions.html"><a href="functions.html#why-put-your-operations-inside-user-defined-functions"><i class="fa fa-check"></i><b>4.1.1</b> Why put your operations inside user-defined functions?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="functions.html"><a href="functions.html#functions-environments"><i class="fa fa-check"></i><b>4.2</b> Environments</a></li>
+<li class="chapter" data-level="4.3" data-path="functions.html"><a href="functions.html#functions-apply"><i class="fa fa-check"></i><b>4.3</b> Applying functions repeatedly</a></li>
+<li class="chapter" data-level="4.4" data-path="functions.html"><a href="functions.html#debugging-user-defined-functions"><i class="fa fa-check"></i><b>4.4</b> Debugging user-defined functions</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="functions.html"><a href="functions.html#the-browser-function"><i class="fa fa-check"></i><b>4.4.1</b> The browser() function</a></li>
+<li class="chapter" data-level="4.4.2" data-path="functions.html"><a href="functions.html#the-errorrecover-setting"><i class="fa fa-check"></i><b>4.4.2</b> The error=recover setting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html"><i class="fa fa-check"></i><b>5</b> The data.table and magrittr packages</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#first-load-the-two-packages"><i class="fa fa-check"></i><b>5.1</b> First load the two packages</a></li>
+<li class="chapter" data-level="5.2" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#the-magrittr-package-aka-pipes"><i class="fa fa-check"></i><b>5.2</b> The magrittr package, AKA pipes</a></li>
+<li class="chapter" data-level="5.3" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#the-data.table-package"><i class="fa fa-check"></i><b>5.3</b> The data.table package</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-index-shortcuts"><i class="fa fa-check"></i><b>5.3.1</b> Row and column indexing utilises shortcuts</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-assignment"><i class="fa fa-check"></i><b>5.3.2</b> The in-place assignment operator <code>:=</code></a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-by"><i class="fa fa-check"></i><b>5.3.3</b> Operations <u>by groups</u> of rows</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-functions"><i class="fa fa-check"></i><b>5.3.4</b> Handy data.table functions</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-magrittr"><i class="fa fa-check"></i><b>5.4</b> Combining data.table and magrittr</a></li>
+<li class="chapter" data-level="5.5" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#packages-why-not-dplyr"><i class="fa fa-check"></i><b>5.5</b> Why data.table rather than dplyr here</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="graphs.html"><a href="graphs.html"><i class="fa fa-check"></i><b>6</b> Graphs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="graphs.html"><a href="graphs.html#base-r-or-ggplot"><i class="fa fa-check"></i><b>6.1</b> Base R or ggplot?</a></li>
+<li class="chapter" data-level="6.2" data-path="graphs.html"><a href="graphs.html#base-r-graph-examples"><i class="fa fa-check"></i><b>6.2</b> Base R graph examples</a></li>
+<li class="chapter" data-level="6.3" data-path="graphs.html"><a href="graphs.html#ggplot-graph-examples"><i class="fa fa-check"></i><b>6.3</b> ggplot graph examples</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="coming-soon.html"><a href="coming-soon.html"><i class="fa fa-check"></i><b>7</b> Coming soon</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="coming-soon.html"><a href="coming-soon.html#workflow"><i class="fa fa-check"></i><b>7.1</b> Workflow</a></li>
+<li class="chapter" data-level="7.2" data-path="coming-soon.html"><a href="coming-soon.html#good-habits"><i class="fa fa-check"></i><b>7.2</b> Good habits</a></li>
+<li class="chapter" data-level="7.3" data-path="coming-soon.html"><a href="coming-soon.html#better-examples"><i class="fa fa-check"></i><b>7.3</b> Better examples</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Tools for Quantitative Data Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="functions" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Functions (and environments)<a href="functions.html#functions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Functions convert inputs into outputs. Every function call, such as <code>runif(n=5, min=-10, max=10)</code>, has two key components:</p>
+<ul>
+<li><u>The function name</u>, in this case <code>runif</code>, which is short for ‘random uniform distribution’.</li>
+<li><u>The function arguments</u> written inside parenthesis after the name and separated by commas. In this case the arguments are <code>n</code>, <code>min</code> and <code>max</code>. Different functions have different arguments.</li>
+</ul>
+<p><b>To get the description of a function and its arguments</b>, type <code>?&lt;function name&gt;</code> into the console – for example, <code>?runif</code>. The help file will open in RStudio’s ‘Help’ pane. Try it.</p>
+<p>Some things to know about function arguments:</p>
+<ul>
+<li><u>Argument names don’t have to be written</u> when calling the function; for example, <code>runif(n=5, min=-10, max=10)</code> does the same thing as <code>runif(5, -10, 10)</code>. If you provide the arguments without names, R will assume the arguments are in the same order as in the function definition (i.e. as written in the help file).</li>
+<li><u>Default arguments</u>. Many functions have arguments that don’t need to be specified by the user because they have default vaues. The help file tells you which arguments have defaults – if the argument name is followed by <code>=</code> then a value, then that argument has a default of that value. For example, <code>runif(5, 0, 1)</code> does the same thing as <code>runif(5)</code>.</li>
+<li><u>Dot dot dot</u> (i.e. <code>...</code>). In a function definition, <code>...</code> means that any number of arguments can be provided. For example, look up the help file for <code>c()</code>. In this case, the function will combine whatever arguments are provided.</li>
+<li><u>Some functions don’t need arguments</u>, but the parentheses must still be written. For example, <code>c()</code> generates an empty vector, which is sometimes used to initialise an object before putting things in it.</li>
+<li><u>Operators are functions too</u>. Operators like <code>+</code> or <code>[]</code> are just functions that take their arguments differently. They can be expressed in the same form as other functions, with the use of backticks <code>` `</code>. For example, <code>1 + 2</code> is the same as <code>`+`(1, 2)</code> and <code>seq(101, 105)[3]</code> is the same as <code>`[`(seq(101, 105), 3)</code>.</li>
+</ul>
+<div id="functions-user-defined-functions" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> How to write functions<a href="functions.html#functions-user-defined-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It’s easy to write your own functions, and the more you use R the more you’ll do it. Running code that defines a function – i.e. assigns the written function to the name you give it – puts that function in your environment available to be called upon, like assigning a data object.</p>
+<p>Each function has a name, arguments (if any), a body and an output. Defining a function involves writing some version of the following:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="functions.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This code won&#39;t actually run because the function body is not actual code.</span></span>
+<span id="cb19-2"><a href="functions.html#cb19-2" aria-hidden="true" tabindex="-1"></a>function_name <span class="ot">&lt;-</span> <span class="cf">function</span>(function_arguments) {</span>
+<span id="cb19-3"><a href="functions.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>function_body<span class="sc">:</span> operations on function_arguments that produce output_object<span class="sc">&gt;</span></span>
+<span id="cb19-4"><a href="functions.html#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output_object)</span>
+<span id="cb19-5"><a href="functions.html#cb19-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>A simple example that works:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="functions.html#cb20-1" aria-hidden="true" tabindex="-1"></a>double_F <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {  <span class="co"># I use _F in my own function names for convenience.</span></span>
+<span id="cb20-2"><a href="functions.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb20-3"><a href="functions.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(y)</span>
+<span id="cb20-4"><a href="functions.html#cb20-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-5"><a href="functions.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">double_F</span>(<span class="dv">3</span>)</span>
+<span id="cb20-6"><a href="functions.html#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">double_F</span>(<span class="fl">7.5</span>)</span>
+<span id="cb20-7"><a href="functions.html#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">double_F</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)  <span class="co"># This works because the operation in the body of double_F works on a</span></span>
+<span id="cb20-8"><a href="functions.html#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   numerical x vector of any length.</span></span></code></pre></div>
+<p><strong>Some things worth knowing about user-defined functions</strong>:</p>
+<ul>
+<li><u>The ‘return’ line isn’t always needed</u>. If the function has no return value, and the last line in the function is not an assignment, the function will return the result of the operation in the last line.
+<ul>
+<li>The squiggly brackets <code>{}</code> also aren’t needed, if the function definition fits in one line.</li>
+<li>So, for example, <code>double_F &lt;- function(x) x * 2</code> works just as well as the example above. Try it. Single-line functions can be useful, as demonstrated in section <a href="functions.html#functions-apply">4.3</a>.</li>
+</ul></li>
+<li><u>The argument names have no consequence</u>.
+<ul>
+<li>For example, <code>fun1 &lt;- function(x) x * 2</code> and <code>fun2 &lt;- function(z) z * 2</code> and <code>fun3 &lt;- function(push_the_envelope_watch_it_bend) push_the_envelope_watch_it_bend * 2</code> do identical things.</li>
+<li>But, as always, try choose the names to make it easy for a reader to understand what the function is doing. <code>x</code> is a commonly used argument name because it references the typical mathematical function definition <span class="math inline">\(y=f(x)\)</span>.</li>
+</ul></li>
+<li><u>The output can be only a single object</u>.
+<ul>
+<li>If you need your function to return multiple objects, store them as elements of the same list, and return that list.</li>
+</ul></li>
+<li><u>The output does not need to utilise the arguments</u>.
+<ul>
+<li>For example, the function <code>fun4 &lt;- function(x) 7</code> is a legitimate function, and will return <code>7</code> whenever it is called, regardless of what <code>x</code> argument is provided. Try it.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="functions.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Example of a function that I sometimes use. </span></span>
+<span id="cb21-2"><a href="functions.html#cb21-2" aria-hidden="true" tabindex="-1"></a>quarterendify_F <span class="ot">&lt;-</span> <span class="cf">function</span>(datevec, <span class="at">as_numeric=</span><span class="cn">FALSE</span>) {</span>
+<span id="cb21-3"><a href="functions.html#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Converts character dates to the end of the quarter that they&#39;re in.</span></span>
+<span id="cb21-4"><a href="functions.html#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Arguments:</span></span>
+<span id="cb21-5"><a href="functions.html#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># - datevec: character vector in &#39;yyyy-mm-dd&#39; format</span></span>
+<span id="cb21-6"><a href="functions.html#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># - as_numeric: if TRUE, returns the date as numeric vector in yyyymmdd format.</span></span>
+<span id="cb21-7"><a href="functions.html#cb21-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-8"><a href="functions.html#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Generate error if some formatting conditions are not met.</span></span>
+<span id="cb21-9"><a href="functions.html#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">any</span>(<span class="fu">nchar</span>(datevec) <span class="sc">!=</span> <span class="dv">10</span>)) <span class="fu">stop</span>(<span class="st">&#39;Some datevec in wrong format: not 10 characters.&#39;</span>)</span>
+<span id="cb21-10"><a href="functions.html#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">any</span>(<span class="fu">substr</span>(datevec, <span class="dv">5</span>, <span class="dv">5</span>) <span class="sc">!=</span> <span class="st">&#39;-&#39;</span> <span class="sc">|</span> <span class="fu">substr</span>(datevec, <span class="dv">8</span>, <span class="dv">8</span>) <span class="sc">!=</span> <span class="st">&#39;-&#39;</span>)) {</span>
+<span id="cb21-11"><a href="functions.html#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&#39;Some datevec in wrong format: do not have </span><span class="sc">\&#39;</span><span class="st">-</span><span class="sc">\&#39;</span><span class="st"> in 5th and 8th positions.&#39;</span>)</span>
+<span id="cb21-12"><a href="functions.html#cb21-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb21-13"><a href="functions.html#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Could write in more of these - e.g. make sure mm is &lt;= 12 and dd &lt;= 31.</span></span>
+<span id="cb21-14"><a href="functions.html#cb21-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-15"><a href="functions.html#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Logical vector of which dates need replacing, i.e. are not already quarter ends</span></span>
+<span id="cb21-16"><a href="functions.html#cb21-16" aria-hidden="true" tabindex="-1"></a>  chng_B <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">substr</span>(datevec, <span class="dv">6</span>, <span class="dv">10</span>) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;03-31&#39;</span>, <span class="st">&#39;06-30&#39;</span>, <span class="st">&#39;09-30&#39;</span>, <span class="st">&#39;12-31&#39;</span>)</span>
+<span id="cb21-17"><a href="functions.html#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Start generating replacement dates. First change the months.</span></span>
+<span id="cb21-18"><a href="functions.html#cb21-18" aria-hidden="true" tabindex="-1"></a>  repl <span class="ot">&lt;-</span> datevec[chng_B] </span>
+<span id="cb21-19"><a href="functions.html#cb21-19" aria-hidden="true" tabindex="-1"></a>  repl <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&#39;-01-|-02-&#39;</span>, <span class="st">&#39;-03-&#39;</span>, repl) </span>
+<span id="cb21-20"><a href="functions.html#cb21-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># When 1st sub argument has &#39;|&#39; in it, it&#39;s treated as &#39;or&#39; (i.e. looks for either).</span></span>
+<span id="cb21-21"><a href="functions.html#cb21-21" aria-hidden="true" tabindex="-1"></a>  repl <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&#39;-04-|-05-&#39;</span>, <span class="st">&#39;-06-&#39;</span>, repl) </span>
+<span id="cb21-22"><a href="functions.html#cb21-22" aria-hidden="true" tabindex="-1"></a>  repl <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&#39;-07-|-08-&#39;</span>, <span class="st">&#39;-09-&#39;</span>, repl)</span>
+<span id="cb21-23"><a href="functions.html#cb21-23" aria-hidden="true" tabindex="-1"></a>  repl <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&#39;-10-|-11-&#39;</span>, <span class="st">&#39;-12-&#39;</span>, repl)</span>
+<span id="cb21-24"><a href="functions.html#cb21-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Identify which repl elements have June and Sep quarters. _B in name denotes boolean.</span></span>
+<span id="cb21-25"><a href="functions.html#cb21-25" aria-hidden="true" tabindex="-1"></a>  jun_n_sep_B <span class="ot">&lt;-</span> <span class="fu">substr</span>(repl, <span class="dv">6</span>, <span class="dv">7</span>) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;06&#39;</span>, <span class="st">&#39;09&#39;</span>)</span>
+<span id="cb21-26"><a href="functions.html#cb21-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add &#39;-dd&#39; in for June and Sep qtrs, then March and Dec qtr</span></span>
+<span id="cb21-27"><a href="functions.html#cb21-27" aria-hidden="true" tabindex="-1"></a>  repl[jun_n_sep_B] <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">substr</span>(repl[jun_n_sep_B], <span class="dv">1</span>, <span class="dv">8</span>), <span class="st">&#39;30&#39;</span>)</span>
+<span id="cb21-28"><a href="functions.html#cb21-28" aria-hidden="true" tabindex="-1"></a>  repl[<span class="sc">!</span>jun_n_sep_B] <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">substr</span>(repl[<span class="sc">!</span>jun_n_sep_B], <span class="dv">1</span>, <span class="dv">8</span>), <span class="st">&#39;31&#39;</span>)</span>
+<span id="cb21-29"><a href="functions.html#cb21-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Generate and populate output vector &#39;y&#39;</span></span>
+<span id="cb21-30"><a href="functions.html#cb21-30" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> datevec</span>
+<span id="cb21-31"><a href="functions.html#cb21-31" aria-hidden="true" tabindex="-1"></a>  y[chng_B] <span class="ot">&lt;-</span> repl</span>
+<span id="cb21-32"><a href="functions.html#cb21-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># If argument not set to default, convert to numeric yyyymmdd format.</span></span>
+<span id="cb21-33"><a href="functions.html#cb21-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(as_numeric) y <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&#39;-&#39;</span>, <span class="st">&#39;&#39;</span>, y))</span>
+<span id="cb21-34"><a href="functions.html#cb21-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(y)</span>
+<span id="cb21-35"><a href="functions.html#cb21-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-36"><a href="functions.html#cb21-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-37"><a href="functions.html#cb21-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Demonstrate it</span></span>
+<span id="cb21-38"><a href="functions.html#cb21-38" aria-hidden="true" tabindex="-1"></a><span class="fu">quarterendify_F</span>(<span class="fu">c</span>(<span class="st">&#39;2021-03-30&#39;</span>, <span class="st">&#39;2021-03-31&#39;</span>, <span class="st">&#39;2021-04-01&#39;</span>))</span>
+<span id="cb21-39"><a href="functions.html#cb21-39" aria-hidden="true" tabindex="-1"></a><span class="fu">quarterendify_F</span>(<span class="fu">c</span>(<span class="st">&#39;2021-03-30&#39;</span>, <span class="st">&#39;2021-03-31&#39;</span>, <span class="st">&#39;2021-04-01&#39;</span>), <span class="at">as_numeric=</span><span class="cn">TRUE</span>)</span>
+<span id="cb21-40"><a href="functions.html#cb21-40" aria-hidden="true" tabindex="-1"></a><span class="fu">quarterendify_F</span>(<span class="fu">c</span>(<span class="st">&#39;2021-03-30&#39;</span>, <span class="st">&#39;2021-03-31&#39;</span>, <span class="st">&#39;2021-04-1&#39;</span>))</span>
+<span id="cb21-41"><a href="functions.html#cb21-41" aria-hidden="true" tabindex="-1"></a><span class="fu">quarterendify_F</span>(<span class="fu">c</span>(<span class="st">&#39;30-03-2021&#39;</span>, <span class="st">&#39;31-03-2021&#39;</span>, <span class="st">&#39;01-04-2021&#39;</span>))</span></code></pre></div>
+<p><strong>When R runs a function it works through the following process</strong>:</p>
+<ol style="list-style-type: decimal">
+<li>Starts working through the operations inside the function definition, in this case <code>y &lt;- x * 2</code></li>
+<li>If it encounters any objects that haven’t been defined inside the body, checks if these objects are function arguments, which, in this case, <code>x</code> is.</li>
+<li>Continues the operations using any such required function arguments, and stores any newly assigned objects in the environment.</li>
+<li>Returns the object specified in the return line.</li>
+</ol>
+<!-- <u>Tip for writing user-defined functions</u>. If the function has more than one or two operations, don't try to write the whole function in one go before checking if the operations work. To make it easier, assign some objects in your environment that match the arguments, and test the operations within the functions as you write them. Once the function is written, clear the environment (ctrl + shift + f10) to be sure that the function is using its arguments rather than the objects you assigned, and then test the function out. -->
+<div id="why-put-your-operations-inside-user-defined-functions" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Why put your operations inside user-defined functions?<a href="functions.html#why-put-your-operations-inside-user-defined-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Four reasons (at least):</p>
+<ul>
+<li><strong>Less code to write</strong>. If you’re running the same set of operations multiple times, putting them into a function means they only have to be written once, when defining the function. The subsequent runs can call that function.</li>
+<li><strong>Lower likelihood of mistakes</strong>. If the set of operations is written only once, there’s only one place you need to check for errors.</li>
+<li><strong>Keeps the global environment clean.</strong> There’s more on this in section <a href="functions.html#functions-environments">4.2</a>. Operations in functions can assign and use new objects without any concern about affecting the global environment.</li>
+<li><strong>Allows neater code</strong>. Functions are a neat way of grouping self-contained sets of operations together, which can be very helpful for keeping the contents of scripts neatly organised.</li>
+</ul>
+</div>
+</div>
+<div id="functions-environments" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Environments<a href="functions.html#functions-environments" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The ‘environment’ is what contains the objects that are on hand to use (sometimes called the ‘frame’ for the objects). When you open an R session, you will be operating in the <strong>global environment</strong>. Open the ‘Environment’ pane in RStudio, and you will see that when you assign objects, they will appear in the global environment. These objects include data objects and functions.</p>
+<p>Each time a function is run, that function temporarily creates its own <strong>local environment</strong>, which disappears once the function has completed running. All objects that were assigned in operations inside the functions disappear with it. The only object that passes back to the enclosing (e.g. global) environment is the specified return value. In other words, <u>functions clean up after themselves</u>. This is true for user-defined functions and for predefined functions.</p>
+<p><strong>Environments are hierarchical</strong>: when a function is called from the global environment, its local environment is enclosed within the global environment. Functions often also call other functions (e.g. the <code>`*`</code> function in <code>double_F</code> above). If one function calls a second function, the second function’s local environment is enclosed within the first function’s local environment. So you can have a global environment enclosing a local environment, which encloses another local environment, which encloses another, etc.</p>
+<p>What does this hierarchy mean in practical terms? It’s mainly about how objects are looked for, or ‘scoped’.</p>
+<ul>
+<li>It was already noted that <u>the global environment cannot access objects created within a local environment</u> enclosed within it. (When your running code moves back to the global environment, the local environment will be gone.)</li>
+<li><u>The reverse is not true</u>. Local environments can access objects in any environments that enclose them. For example, objects assigned in the global environment will be available to use in any local environment that exists (temporarily) within that global environment.</li>
+<li><u>The main implication of the hierarchy</u> is that when the function encounters an object name in its body and looks for the object its attached to (i.e. step 2 in section <a href="functions.html#functions-user-defined-functions">4.1</a> above), the hierarchy is followed:
+<ul>
+<li>Objects are first looked for in the function arguments, and if found, they are used.</li>
+<li>If not in the function arguments, objects are looked for in the enclosing environment one level up.</li>
+<li>If not found one level up, objects are looked for in the enclosing environment two levels up.</li>
+<li>etc.</li>
+</ul></li>
+<li>Therefore, functions can use objects that exist in the enclosing environment, without having to pass them through as arguments.
+<ul>
+<li><u>However</u>, it’s best practice to pass the objects as arguments, because then the function’s operations do not depend on the state of the environment in which it was called. Doing otherwise is an easy way to introduce mistakes. One exception is when the objects being accessed from higher environments are functions (e.g. user-defined functions defined in the global environment). This is standard practice and doing otherwise would get a bit infeasible.</li>
+</ul></li>
+</ul>
+<p>The <strong>namespace environment</strong> was briefly mentioned in section <a href="getting-started.html#getting-started-packages">1.3</a>. Put simply, it contains all the base R functions and any functions loaded in with packages, and encloses the global environment.</p>
+<!-- If you do enough coding, you'll at some point encounter this strange feature of function environments: <u>local environments are defined when the function is defined, not when it is called</u>. Give examples. NEED TO REFIND THE SPECIFIC INFO FOR THIS. Above I say: "when a function is called from the global environment". Maybe this should be: "when a function is defined in the global environment". -->
+<p>The namsepace environment sits above (i.e. encloses) the global environment, and contains all the base functions and functions that have been loaded in from packages.</p>
+<p>This document focuses on using R for analysing data, for which the software development side of things is not particularly relevant. If you delve into the development side of R, you’ll encounter a lot more intricate details about environments.</p>
+</div>
+<div id="functions-apply" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Applying functions repeatedly<a href="functions.html#functions-apply" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The ‘apply’ family of functions – e.g. <code>lapply()</code> – run functions on multiple elements simultaneously. They’re usually a better alternative to loops (see section <a href="object-types.html#object-types-loops">2.6.2</a>): instead of writing a code chunk inside a for loop, write it inside a user-defined function, then run that function on all the desired objects/elements with <code>lapply()</code> (or another apply function).</p>
+<p><strong>Apply functions are useful in several situations</strong>:</p>
+<ul>
+<li><u>Whenever a loop would be useful and the loop iterations are not recursive</u> (i.e. the iterations do not require outcomes from previous loop iterations).</li>
+<li>Sometimes you want to do the <u>same thing to multiple rows or columns of a data frame</u>, and no function exists that does it all at once. In this case you can take or write a function that works on one row or column, and run that function in lapply/apply/etc.</li>
+<li>Sometimes you have a list of datasets and want to run the same function on each dataset. For example, simulation models I’ve worked on have a data frame of results for each simulated entity (e.g. each bank), stored together in a list. To run simulations, you can write a function that runs on one entity, then run it on all entities with <code>lapply()</code>.</li>
+</ul>
+<p><strong>The apply family comprises, in order of usefulness</strong>:</p>
+<ul>
+<li><code>lapply()</code> AKA <u>list apply</u>. Runs a function on every element of a list (or vector) and returns a list of the results.</li>
+<li><code>mapply()</code> AKA <u>multivariate apply</u>. Takes two or more lists of the same length, and does the same thing as <code>lapply()</code>, but running the function on the corresponding elements from each of the lists.</li>
+<li><code>sapply()</code>AKA <u>simplify apply</u>. Same as <code>lapply()</code> but tries to ‘simplify’ the output from a list to a matrix or vector.
+<ul>
+<li><em>Careful</em>: <code>sapply()</code> can be a bit unpredictable in the format that it returns results. It’s often better to combine <code>unlist()</code> with <code>lapply()</code>, to turn the list output into a vector.</li>
+</ul></li>
+<li><code>apply()</code>. Runs a function on every row, or every column, of a data frame or matrix, and tries to return a matrix. People often prefer using <code>lapply()</code> because its syntax is neater.</li>
+</ul>
+<p><strong>The following examples will focus on <code>lapply()</code></strong>. Run <code>?lapply</code> and you’ll see the arguments are:</p>
+<ul>
+<li>X: A vector or list. The function specified in FUN will be run on each element of this vector or list, one at a time. Specifically, these elements will each be used as the first argument into that function.</li>
+<li>FUN: The function to apply. If it’s a one-liner user-defined function, one option is to defined is inside the call to lapply.</li>
+<li>…: Any other arguments that also need to be passed to FUN, but are the same each time FUN is called (i.e. there is no iteration for them).</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="functions.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Say we want the product of each row from the iris dataset (excluding the Species column)</span></span>
+<span id="cb22-2"><a href="functions.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Vectorised functions exist for the sum and mean (rowSums() and rowMeans()), but not for</span></span>
+<span id="cb22-3"><a href="functions.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   the product.</span></span>
+<span id="cb22-4"><a href="functions.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that this is much easier in data.table, but it&#39;s worth working through to get </span></span>
+<span id="cb22-5"><a href="functions.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   familiar with lapply().</span></span>
+<span id="cb22-6"><a href="functions.html#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="functions.html#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="do">### Option 1 - lapply with pre-written single-argument function</span></span>
+<span id="cb22-8"><a href="functions.html#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># First write a function that does the calculation on one row</span></span>
+<span id="cb22-9"><a href="functions.html#cb22-9" aria-hidden="true" tabindex="-1"></a>rowprod_F1 <span class="ot">&lt;-</span> <span class="cf">function</span>(row_num) {</span>
+<span id="cb22-10"><a href="functions.html#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Grab the elements to take the product of</span></span>
+<span id="cb22-11"><a href="functions.html#cb22-11" aria-hidden="true" tabindex="-1"></a>  iris_row <span class="ot">&lt;-</span> iris[row_num, <span class="fu">colnames</span>(iris) <span class="sc">!=</span> <span class="st">&#39;Species&#39;</span>]</span>
+<span id="cb22-12"><a href="functions.html#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calcuate the product</span></span>
+<span id="cb22-13"><a href="functions.html#cb22-13" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">prod</span>(iris_row)</span>
+<span id="cb22-14"><a href="functions.html#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(result)</span>
+<span id="cb22-15"><a href="functions.html#cb22-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-16"><a href="functions.html#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Then run it on all rows with lapply()</span></span>
+<span id="cb22-17"><a href="functions.html#cb22-17" aria-hidden="true" tabindex="-1"></a>rowprods1 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(iris),  <span class="co"># Each element of this will be used as the first </span></span>
+<span id="cb22-18"><a href="functions.html#cb22-18" aria-hidden="true" tabindex="-1"></a>                    <span class="co">#   argument into the function specified next.</span></span>
+<span id="cb22-19"><a href="functions.html#cb22-19" aria-hidden="true" tabindex="-1"></a>                    rowprod_F)  <span class="co"># The function to apply.</span></span>
+<span id="cb22-20"><a href="functions.html#cb22-20" aria-hidden="true" tabindex="-1"></a>rowprods1 <span class="ot">&lt;-</span> <span class="fu">unlist</span>(rowprods1)  <span class="co"># Convert the output from list to vector</span></span>
+<span id="cb22-21"><a href="functions.html#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-22"><a href="functions.html#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="do">### Option 2 - lapply() with pre-written double-argument function.</span></span>
+<span id="cb22-23"><a href="functions.html#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Notice that rowprod_F1 read iris from the global environment. It&#39;s best practice to </span></span>
+<span id="cb22-24"><a href="functions.html#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="co">#   explicitly pass objects like this in as function arguments. The following does that.</span></span>
+<span id="cb22-25"><a href="functions.html#cb22-25" aria-hidden="true" tabindex="-1"></a>rowprod_F2 <span class="ot">&lt;-</span> <span class="cf">function</span>(row_num, iris_dataset) {</span>
+<span id="cb22-26"><a href="functions.html#cb22-26" aria-hidden="true" tabindex="-1"></a>  iris_row <span class="ot">&lt;-</span> iris_dataset[row_num, <span class="fu">colnames</span>(iris_dataset) <span class="sc">!=</span> <span class="st">&#39;Species&#39;</span>]</span>
+<span id="cb22-27"><a href="functions.html#cb22-27" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">prod</span>(iris_row)</span>
+<span id="cb22-28"><a href="functions.html#cb22-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(result)</span>
+<span id="cb22-29"><a href="functions.html#cb22-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-30"><a href="functions.html#cb22-30" aria-hidden="true" tabindex="-1"></a>rowprods2 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(iris), rowprod_F2, </span>
+<span id="cb22-31"><a href="functions.html#cb22-31" aria-hidden="true" tabindex="-1"></a>                    iris)  <span class="co"># Passed as the second argument for FUN, and not iterated over.</span></span>
+<span id="cb22-32"><a href="functions.html#cb22-32" aria-hidden="true" tabindex="-1"></a>rowprods2 <span class="ot">&lt;-</span> <span class="fu">unlist</span>(rowprods2)</span>
+<span id="cb22-33"><a href="functions.html#cb22-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-34"><a href="functions.html#cb22-34" aria-hidden="true" tabindex="-1"></a><span class="do">### Option 3 - lapply() with a one liner</span></span>
+<span id="cb22-35"><a href="functions.html#cb22-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Will use shorter function argument names to make it a bit more compact</span></span>
+<span id="cb22-36"><a href="functions.html#cb22-36" aria-hidden="true" tabindex="-1"></a>rowprods3 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(iris), </span>
+<span id="cb22-37"><a href="functions.html#cb22-37" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">function</span>(i, data) <span class="fu">prod</span>(data[i, <span class="fu">colnames</span>(data) <span class="sc">!=</span> <span class="st">&#39;Species&#39;</span>]), </span>
+<span id="cb22-38"><a href="functions.html#cb22-38" aria-hidden="true" tabindex="-1"></a>                    iris)</span>
+<span id="cb22-39"><a href="functions.html#cb22-39" aria-hidden="true" tabindex="-1"></a>rowprods3 <span class="ot">&lt;-</span> <span class="fu">unlist</span>(rowprods3)</span>
+<span id="cb22-40"><a href="functions.html#cb22-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-41"><a href="functions.html#cb22-41" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(rowprods1, rowprods2, rowprods3)</span>
+<span id="cb22-42"><a href="functions.html#cb22-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-43"><a href="functions.html#cb22-43" aria-hidden="true" tabindex="-1"></a><span class="do">### Alternative exercise - lapply() on a list of datasets.</span></span>
+<span id="cb22-44"><a href="functions.html#cb22-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Say we have a lsit of datasets and want the dimensions of each one.</span></span>
+<span id="cb22-45"><a href="functions.html#cb22-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the hypothetical list</span></span>
+<span id="cb22-46"><a href="functions.html#cb22-46" aria-hidden="true" tabindex="-1"></a>dataset_L <span class="ot">&lt;-</span> <span class="fu">list</span>(iris, mtcars, cars)</span>
+<span id="cb22-47"><a href="functions.html#cb22-47" aria-hidden="true" tabindex="-1"></a>data_dims <span class="ot">&lt;-</span> <span class="fu">lapply</span>(dataset_L, dim)</span>
+<span id="cb22-48"><a href="functions.html#cb22-48" aria-hidden="true" tabindex="-1"></a>data_dims</span></code></pre></div>
+</div>
+<div id="debugging-user-defined-functions" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Debugging user-defined functions<a href="functions.html#debugging-user-defined-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In general, the first – and sometimes only – step in debugging is to <strong>work out exactly which piece of code is causing the problem</strong>. Often this involves stepping through the code one line at a time, and checking the output of each line, to see where things have gone wrong. Once the problem is located, it can be understood and fixed.</p>
+<p>The following information may be more useful to come back to once you’re writing your own functions and need to debug one.</p>
+<div id="the-browser-function" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> The browser() function<a href="functions.html#the-browser-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When the code is inside a user-defined function, this is a bit less simple, because how do you step through each line one a time when all lines are run together as part of a function? The solution is the <code>browser()</code> function, which allows you to step into and explore the local environment inside a function. The process for using it is:</p>
+<ol style="list-style-type: decimal">
+<li>Have a user-defined function that you want to explore for a bug.</li>
+<li>Write <code>browser()</code> as a line in that function and then re-run the function definition.</li>
+<li>Re-run the function as you did before you noticed the bug.</li>
+<li>When the code hits <code>browser()</code>, it will stop running, and open the local environment at that spot.</li>
+</ol>
+<p>Consider one of the <code>lapply()</code> examples above:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="functions.html#cb23-1" aria-hidden="true" tabindex="-1"></a>rowprod_F2 <span class="ot">&lt;-</span> <span class="cf">function</span>(row_num, iris_dataset) {</span>
+<span id="cb23-2"><a href="functions.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  iris_row <span class="ot">&lt;-</span> iris_dataset[row_num, <span class="fu">colnames</span>(iris_dataset) <span class="sc">!=</span> <span class="st">&#39;species&#39;</span>]</span>
+<span id="cb23-3"><a href="functions.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">prod</span>(iris_row)</span>
+<span id="cb23-4"><a href="functions.html#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(result)</span>
+<span id="cb23-5"><a href="functions.html#cb23-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-6"><a href="functions.html#cb23-6" aria-hidden="true" tabindex="-1"></a>rowprods2 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(iris), rowprod_F2, iris) </span>
+<span id="cb23-7"><a href="functions.html#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="functions.html#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Getting an error. Run the following. </span></span>
+<span id="cb23-9"><a href="functions.html#cb23-9" aria-hidden="true" tabindex="-1"></a>rowprod_F2 <span class="ot">&lt;-</span> <span class="cf">function</span>(row_num, iris_dataset) {</span>
+<span id="cb23-10"><a href="functions.html#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">browser</span>()</span>
+<span id="cb23-11"><a href="functions.html#cb23-11" aria-hidden="true" tabindex="-1"></a>  iris_row <span class="ot">&lt;-</span> iris_dataset[row_num, <span class="fu">colnames</span>(iris_dataset) <span class="sc">!=</span> <span class="st">&#39;species&#39;</span>]</span>
+<span id="cb23-12"><a href="functions.html#cb23-12" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">prod</span>(iris_row)</span>
+<span id="cb23-13"><a href="functions.html#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(result)</span>
+<span id="cb23-14"><a href="functions.html#cb23-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-15"><a href="functions.html#cb23-15" aria-hidden="true" tabindex="-1"></a>rowprods2 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(iris), rowprod_F2, iris) </span>
+<span id="cb23-16"><a href="functions.html#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="co"># The local environment will then show up in RStudio&#39;s &#39;Environment&#39; pane, showing only </span></span>
+<span id="cb23-17"><a href="functions.html#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   the arguments passed into the function. </span></span>
+<span id="cb23-18"><a href="functions.html#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co"># - Then run the code in each line of the function one at a time. </span></span>
+<span id="cb23-19"><a href="functions.html#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="co"># - You&#39;ll notice that the problem is in the first line, in the assignment of &#39;iris_row&#39;.</span></span>
+<span id="cb23-20"><a href="functions.html#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="co"># - Then try running &#39;iris_row &lt;- iris_dataset[row_num, ]&#39; to see if the problem is in the</span></span>
+<span id="cb23-21"><a href="functions.html#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="co">#   row indexing. It&#39;s not.</span></span>
+<span id="cb23-22"><a href="functions.html#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="co"># - Then try running &#39;iris_row &lt;- iris_dataset[, colnames(iris_dataset) != &#39;species&#39;]&#39; to</span></span>
+<span id="cb23-23"><a href="functions.html#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="co">#   see if the problem is in the column indexing. It is.</span></span>
+<span id="cb23-24"><a href="functions.html#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="co"># - Run &#39;colnames(iris_dataset) != &#39;species&#39;&#39; to check the if the logical column-indexing</span></span>
+<span id="cb23-25"><a href="functions.html#cb23-25" aria-hidden="true" tabindex="-1"></a><span class="co">#   vector is giving all columns except &#39;species&#39;.</span></span>
+<span id="cb23-26"><a href="functions.html#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="co"># - It is, but &#39;species&#39; has a capital &#39;S&#39;. Problem solved.</span></span></code></pre></div>
+</div>
+<div id="the-errorrecover-setting" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> The error=recover setting<a href="functions.html#the-errorrecover-setting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If this option is switched on by running</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="functions.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">error=</span>recover)</span></code></pre></div>
+<p>then whenever your code produces an error, RStudio will give you the option to enter the local environment where the error occurred (or any environment enclosing it). Sometimes it gives you more options for different environments than you’d like, and it takes some trial and error to work out the desired one.</p>
+<p>To switch it off, run:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="functions.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">error=</span><span class="cn">NULL</span>)</span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="obtaining-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-table-and-magrittr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

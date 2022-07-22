@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Graphs | R Tools for Quantitative Data Analysis</title>
+  <meta name="description" content="Chapter 6 Graphs | R Tools for Quantitative Data Analysis" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Graphs | R Tools for Quantitative Data Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Graphs | R Tools for Quantitative Data Analysis" />
+  
+  
+  
+
+<meta name="author" content="Nick Garvin" />
+
+
+<meta name="date" content="2022-06-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-table-and-magrittr.html"/>
+<link rel="next" href="coming-soon.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://glowing-blancmange-f08364.netlify.app/index.html">R Tools for Quantitative Data Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#getting-started-what-is"><i class="fa fa-check"></i><b>1.1</b> What is a line of R code?</a></li>
+<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#coding-style"><i class="fa fa-check"></i><b>1.2</b> Coding style</a></li>
+<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#getting-started-packages"><i class="fa fa-check"></i><b>1.3</b> Base R and installing packages</a></li>
+<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#example-code-to-play-with"><i class="fa fa-check"></i><b>1.4</b> Example code to play with</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="object-types.html"><a href="object-types.html"><i class="fa fa-check"></i><b>2</b> Types of data objects</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="object-types.html"><a href="object-types.html#vectors"><i class="fa fa-check"></i><b>2.1</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="object-types.html"><a href="object-types.html#numeric-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Numeric vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="object-types.html"><a href="object-types.html#character-vectors"><i class="fa fa-check"></i><b>2.1.2</b> Character vectors</a></li>
+<li class="chapter" data-level="2.1.3" data-path="object-types.html"><a href="object-types.html#factor-vectors"><i class="fa fa-check"></i><b>2.1.3</b> Factor vectors</a></li>
+<li class="chapter" data-level="2.1.4" data-path="object-types.html"><a href="object-types.html#logical-vectors"><i class="fa fa-check"></i><b>2.1.4</b> Logical vectors</a></li>
+<li class="chapter" data-level="2.1.5" data-path="object-types.html"><a href="object-types.html#date-vectors"><i class="fa fa-check"></i><b>2.1.5</b> Date vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="object-types.html"><a href="object-types.html#vector-operations-and-indexing"><i class="fa fa-check"></i><b>2.2</b> Vector operations and indexing</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="object-types.html"><a href="object-types.html#object-types-vector-wise"><i class="fa fa-check"></i><b>2.2.1</b> Vector-wise operations and recycling</a></li>
+<li class="chapter" data-level="2.2.2" data-path="object-types.html"><a href="object-types.html#named-vector-elements"><i class="fa fa-check"></i><b>2.2.2</b> Named vector elements</a></li>
+<li class="chapter" data-level="2.2.3" data-path="object-types.html"><a href="object-types.html#how-to-index-vectors"><i class="fa fa-check"></i><b>2.2.3</b> How to index vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="object-types.html"><a href="object-types.html#arrays"><i class="fa fa-check"></i><b>2.3</b> Arrays</a></li>
+<li class="chapter" data-level="2.4" data-path="object-types.html"><a href="object-types.html#data-frames"><i class="fa fa-check"></i><b>2.4</b> Data frames</a></li>
+<li class="chapter" data-level="2.5" data-path="object-types.html"><a href="object-types.html#lists"><i class="fa fa-check"></i><b>2.5</b> Lists</a></li>
+<li class="chapter" data-level="2.6" data-path="object-types.html"><a href="object-types.html#if-statements-and-for-loops"><i class="fa fa-check"></i><b>2.6</b> ‘If’ statements and ‘for’ loops</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="object-types.html"><a href="object-types.html#if-statements"><i class="fa fa-check"></i><b>2.6.1</b> If statements</a></li>
+<li class="chapter" data-level="2.6.2" data-path="object-types.html"><a href="object-types.html#object-types-loops"><i class="fa fa-check"></i><b>2.6.2</b> For loops</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="object-types.html"><a href="object-types.html#recap"><i class="fa fa-check"></i><b>2.7</b> Recap</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="obtaining-data.html"><a href="obtaining-data.html"><i class="fa fa-check"></i><b>3</b> Obtaining data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="obtaining-data.html"><a href="obtaining-data.html#common-functions-for-importing-data"><i class="fa fa-check"></i><b>3.1</b> Common functions for importing data</a></li>
+<li class="chapter" data-level="3.2" data-path="obtaining-data.html"><a href="obtaining-data.html#where-to-save-data"><i class="fa fa-check"></i><b>3.2</b> Where to save data</a></li>
+<li class="chapter" data-level="3.3" data-path="obtaining-data.html"><a href="obtaining-data.html#import-data-projects"><i class="fa fa-check"></i><b>3.3</b> Setting up an RStudio project</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="obtaining-data.html"><a href="obtaining-data.html#when-to-use-packages-instead-of-projects"><i class="fa fa-check"></i><b>3.3.1</b> When to use packages instead of projects</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>4</b> Functions (and environments)</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="functions.html"><a href="functions.html#functions-user-defined-functions"><i class="fa fa-check"></i><b>4.1</b> How to write functions</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="functions.html"><a href="functions.html#why-put-your-operations-inside-user-defined-functions"><i class="fa fa-check"></i><b>4.1.1</b> Why put your operations inside user-defined functions?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="functions.html"><a href="functions.html#functions-environments"><i class="fa fa-check"></i><b>4.2</b> Environments</a></li>
+<li class="chapter" data-level="4.3" data-path="functions.html"><a href="functions.html#functions-apply"><i class="fa fa-check"></i><b>4.3</b> Applying functions repeatedly</a></li>
+<li class="chapter" data-level="4.4" data-path="functions.html"><a href="functions.html#debugging-user-defined-functions"><i class="fa fa-check"></i><b>4.4</b> Debugging user-defined functions</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="functions.html"><a href="functions.html#the-browser-function"><i class="fa fa-check"></i><b>4.4.1</b> The browser() function</a></li>
+<li class="chapter" data-level="4.4.2" data-path="functions.html"><a href="functions.html#the-errorrecover-setting"><i class="fa fa-check"></i><b>4.4.2</b> The error=recover setting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html"><i class="fa fa-check"></i><b>5</b> The data.table and magrittr packages</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#first-load-the-two-packages"><i class="fa fa-check"></i><b>5.1</b> First load the two packages</a></li>
+<li class="chapter" data-level="5.2" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#the-magrittr-package-aka-pipes"><i class="fa fa-check"></i><b>5.2</b> The magrittr package, AKA pipes</a></li>
+<li class="chapter" data-level="5.3" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#the-data.table-package"><i class="fa fa-check"></i><b>5.3</b> The data.table package</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-index-shortcuts"><i class="fa fa-check"></i><b>5.3.1</b> Row and column indexing utilises shortcuts</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-assignment"><i class="fa fa-check"></i><b>5.3.2</b> The in-place assignment operator <code>:=</code></a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-by"><i class="fa fa-check"></i><b>5.3.3</b> Operations <u>by groups</u> of rows</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-functions"><i class="fa fa-check"></i><b>5.3.4</b> Handy data.table functions</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-magrittr"><i class="fa fa-check"></i><b>5.4</b> Combining data.table and magrittr</a></li>
+<li class="chapter" data-level="5.5" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#packages-why-not-dplyr"><i class="fa fa-check"></i><b>5.5</b> Why data.table rather than dplyr here</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="graphs.html"><a href="graphs.html"><i class="fa fa-check"></i><b>6</b> Graphs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="graphs.html"><a href="graphs.html#base-r-or-ggplot"><i class="fa fa-check"></i><b>6.1</b> Base R or ggplot?</a></li>
+<li class="chapter" data-level="6.2" data-path="graphs.html"><a href="graphs.html#base-r-graph-examples"><i class="fa fa-check"></i><b>6.2</b> Base R graph examples</a></li>
+<li class="chapter" data-level="6.3" data-path="graphs.html"><a href="graphs.html#ggplot-graph-examples"><i class="fa fa-check"></i><b>6.3</b> ggplot graph examples</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="coming-soon.html"><a href="coming-soon.html"><i class="fa fa-check"></i><b>7</b> Coming soon</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="coming-soon.html"><a href="coming-soon.html#workflow"><i class="fa fa-check"></i><b>7.1</b> Workflow</a></li>
+<li class="chapter" data-level="7.2" data-path="coming-soon.html"><a href="coming-soon.html#good-habits"><i class="fa fa-check"></i><b>7.2</b> Good habits</a></li>
+<li class="chapter" data-level="7.3" data-path="coming-soon.html"><a href="coming-soon.html#better-examples"><i class="fa fa-check"></i><b>7.3</b> Better examples</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Tools for Quantitative Data Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="graphs" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Graphs<a href="graphs.html#graphs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This chapter provides working example code for several graph types, which you can copy and modify for your own use. The code assumes that you have data.table, magrittr and ggplot2 installed and loaded.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="graphs.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load these for the examples below to work for you</span></span>
+<span id="cb52-2"><a href="graphs.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb52-3"><a href="graphs.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb52-4"><a href="graphs.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span></code></pre></div>
+<div id="base-r-or-ggplot" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Base R or ggplot?<a href="graphs.html#base-r-or-ggplot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Base R and the ggplot2 package both have great graphing functionality. (And many other packages exist for less common types types of visualisations.) You can stick to one, but both come in handy. This is one way to use them:</p>
+<ul>
+<li><u>Base R for quick and dirty graphs</u>, when you just want to see what the data look like, and you don’t need to show it to anyone else. For example, base R’s <code>plot()</code> was used in the section <a href="object-types.html#object-types-loops">2.6.2</a> code.</li>
+<li><u>ggplot2 for professional-looking graphs that don’t have a high degree of customisation</u>. Most graphs tend to fall in this category.</li>
+<li><u>Base R for highly customised graphs</u>. ggplot2 can be particularly fiddly if you want to include something in your graph that it isn’t built for. These cases are getting rarer as the package is continually developed, but when you encounter one, it can be much easier to use base R than trying to wrangle ggplot2.</li>
+</ul>
+</div>
+<div id="base-r-graph-examples" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Base R graph examples<a href="graphs.html#base-r-graph-examples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="graphs.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Single variable graph uses the order of the data for the x axis</span></span>
+<span id="cb53-2"><a href="graphs.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Petal.Width)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="graphs.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Petal.Width, <span class="at">t=</span><span class="st">&#39;l&#39;</span>)  <span class="co"># Second arg means &#39;type&#39; = &#39;line&#39;. Default is points.</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-2.png" width="672" /></p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="graphs.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some functions add features to an existing graph</span></span>
+<span id="cb55-2"><a href="graphs.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Petal.Width,</span>
+<span id="cb55-3"><a href="graphs.html#cb55-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">7</span>))  <span class="co"># Specify the y-axis range. Also works for xlim.</span></span>
+<span id="cb55-4"><a href="graphs.html#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(iris<span class="sc">$</span>Petal.Length, <span class="at">col=</span><span class="st">&#39;blue&#39;</span>)  <span class="co"># Adds another variable. points() works similar.</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-3.png" width="672" /></p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="graphs.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Two-variable scatterplot</span></span>
+<span id="cb56-2"><a href="graphs.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Petal.Width, iris<span class="sc">$</span>Petal.Length)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-4.png" width="672" /></p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="graphs.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Next example modifies a few features. Many other things can be modified.</span></span>
+<span id="cb57-2"><a href="graphs.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Petal.Width, iris<span class="sc">$</span>Petal.Length, <span class="at">col=</span><span class="st">&#39;red&#39;</span>,</span>
+<span id="cb57-3"><a href="graphs.html#cb57-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch=</span><span class="dv">20</span>,  <span class="co"># specify the point type. Options are here: https://r-lang.com/pch-in-r/</span></span>
+<span id="cb57-4"><a href="graphs.html#cb57-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&#39;Example scatter plot&#39;</span>, </span>
+<span id="cb57-5"><a href="graphs.html#cb57-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&#39;Petal length&#39;</span>, </span>
+<span id="cb57-6"><a href="graphs.html#cb57-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Petal width&#39;</span>, </span>
+<span id="cb57-7"><a href="graphs.html#cb57-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xaxt=</span><span class="st">&#39;n&#39;</span>)  <span class="co"># Specify no ticks on x axis, so it can be manually added in</span></span>
+<span id="cb57-8"><a href="graphs.html#cb57-8" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>,  <span class="co"># Axis ticks for side &#39;1&#39; (i.e. x axis)</span></span>
+<span id="cb57-9"><a href="graphs.html#cb57-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">at=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">1.25</span>, <span class="fl">2.5</span>),  <span class="co"># Where to put the ticks </span></span>
+<span id="cb57-10"><a href="graphs.html#cb57-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">1.25</span>, <span class="fl">2.5</span>))  <span class="co"># What to write under the ticks (could also be text)</span></span>
+<span id="cb57-11"><a href="graphs.html#cb57-11" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="fl">0.1</span>, <span class="fl">6.5</span>,  <span class="co"># Coordinates for placing the legend </span></span>
+<span id="cb57-12"><a href="graphs.html#cb57-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&#39;Iris observations&#39;</span>, <span class="st">&#39;Nothing of this colour in graph&#39;</span>),  <span class="co"># Legend text</span></span>
+<span id="cb57-13"><a href="graphs.html#cb57-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch=</span><span class="dv">20</span>,  <span class="co"># Legend symbols (could specify e.g. line type (lty) instead)</span></span>
+<span id="cb57-14"><a href="graphs.html#cb57-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">col=</span><span class="fu">c</span>(<span class="st">&#39;red&#39;</span>, <span class="st">&#39;blue&#39;</span>),  <span class="co"># Legend symbol colours</span></span>
+<span id="cb57-15"><a href="graphs.html#cb57-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty=</span><span class="st">&#39;n&#39;</span>)  <span class="co"># Remove box around legend</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-5.png" width="672" /></p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="graphs.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Other types of graphs. Features can be changed same as example above.</span></span>
+<span id="cb58-2"><a href="graphs.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(iris<span class="sc">$</span>Petal.Length, <span class="at">main=</span><span class="st">&#39;Histogram example&#39;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-6.png" width="672" /></p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="graphs.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(iris<span class="sc">$</span>Petal.Length, <span class="dv">50</span>, <span class="at">main=</span><span class="st">&#39;Histogram example with more buckets&#39;</span>,)  <span class="co"># 50 buckets</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-7.png" width="672" /></p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="graphs.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(iris<span class="sc">$</span>Petal.Length[<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>], <span class="at">main=</span><span class="st">&#39;Barplot example&#39;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-8.png" width="672" /></p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="graphs.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Barplot with multiple variables wants the variables as rows. Use &#39;t()&#39; to transpose.</span></span>
+<span id="cb61-2"><a href="graphs.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">t</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="fu">c</span>(<span class="st">&#39;Petal.Length&#39;</span>, <span class="st">&#39;Petal.Width&#39;</span>)]))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-9.png" width="672" /></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="graphs.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(iris[, <span class="fu">c</span>(<span class="st">&#39;Petal.Length&#39;</span>, <span class="st">&#39;Petal.Width&#39;</span>)], <span class="at">main=</span><span class="st">&#39;Boxplot example&#39;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-10.png" width="672" /></p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="graphs.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(iris<span class="sc">$</span>Petal.Width), <span class="at">main=</span><span class="st">&#39;Density function example&#39;</span>)  </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-11.png" width="672" /></p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="graphs.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ecdf</span>(iris<span class="sc">$</span>Petal.Width), <span class="at">main=</span><span class="st">&#39;CDF example&#39;</span>)  <span class="co"># cumulative distribution function</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-12.png" width="672" /></p>
+<p>There are more examples here: <a href="https://statisticsglobe.com/graphics-in-r" class="uri">https://statisticsglobe.com/graphics-in-r</a>.</p>
+</div>
+<div id="ggplot-graph-examples" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> ggplot graph examples<a href="graphs.html#ggplot-graph-examples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The ggplot functions require a bit more code, which can be a bit less intuitive (although nicely systematic), but they have a more presentable default layout. The graphs typically require the data to be in a data frame with ‘long’ format. In data.table, the ‘melt()’ function converts wide to long.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="graphs.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Scatterplots in ggplot</span></span>
+<span id="cb65-2"><a href="graphs.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Minimal working example.</span></span>
+<span id="cb65-3"><a href="graphs.html#cb65-3" aria-hidden="true" tabindex="-1"></a>plotdata <span class="ot">&lt;-</span> <span class="fu">copy</span>(iris)</span>
+<span id="cb65-4"><a href="graphs.html#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plotdata, <span class="fu">aes</span>(<span class="at">x=</span>Petal.Length, <span class="at">y=</span>Petal.Width)) <span class="sc">+</span></span>
+<span id="cb65-5"><a href="graphs.html#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="graphs.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Different colours</span></span>
+<span id="cb66-2"><a href="graphs.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plotdata, <span class="fu">aes</span>(<span class="at">x=</span>Petal.Length, <span class="at">y=</span>Petal.Width, <span class="at">colour=</span>Species)) <span class="sc">+</span></span>
+<span id="cb66-3"><a href="graphs.html#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-54-2.png" width="672" /></p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="graphs.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Another way. This is useful if you want to combine plot types (e.g. point and line), </span></span>
+<span id="cb67-2"><a href="graphs.html#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   and you want to use different variables in each type.</span></span>
+<span id="cb67-3"><a href="graphs.html#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plotdata) <span class="sc">+</span></span>
+<span id="cb67-4"><a href="graphs.html#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>Petal.Length, <span class="at">y=</span>Petal.Width)) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-54-3.png" width="672" /></p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="graphs.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To give an example that mixes two types, first format and combine a couple of the </span></span>
+<span id="cb68-2"><a href="graphs.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   in-built datasets. These datasets are of type &#39;time series&#39; (ts) which nobody really </span></span>
+<span id="cb68-3"><a href="graphs.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   uses. So first format them into a more usable format. &#39;time()&#39; extracts the time </span></span>
+<span id="cb68-4"><a href="graphs.html#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   periods from a ts object.</span></span>
+<span id="cb68-5"><a href="graphs.html#cb68-5" aria-hidden="true" tabindex="-1"></a>sunspot_dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(<span class="fu">time</span>(sunspot.year)), <span class="co"># remove ts object types </span></span>
+<span id="cb68-6"><a href="graphs.html#cb68-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">sunspots =</span> <span class="fu">as.numeric</span>(sunspot.year))  </span>
+<span id="cb68-7"><a href="graphs.html#cb68-7" aria-hidden="true" tabindex="-1"></a>nhtemp_dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(<span class="fu">time</span>(nhtemp)), </span>
+<span id="cb68-8"><a href="graphs.html#cb68-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">temp =</span> <span class="fu">as.numeric</span>(nhtemp))</span>
+<span id="cb68-9"><a href="graphs.html#cb68-9" aria-hidden="true" tabindex="-1"></a>plotdata <span class="ot">&lt;-</span> nhtemp_dt <span class="sc">%&gt;%</span></span>
+<span id="cb68-10"><a href="graphs.html#cb68-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(sunspot_dt, <span class="at">all.x=</span><span class="cn">TRUE</span>, </span>
+<span id="cb68-11"><a href="graphs.html#cb68-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">by=</span><span class="st">&#39;year&#39;</span>)</span>
+<span id="cb68-12"><a href="graphs.html#cb68-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plotdata) <span class="sc">+</span></span>
+<span id="cb68-13"><a href="graphs.html#cb68-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>temp)) <span class="sc">+</span></span>
+<span id="cb68-14"><a href="graphs.html#cb68-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>sunspots))  <span class="co"># Putting the line 2nd layers it &#39;above&#39; the bars.</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-54-4.png" width="672" /></p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="graphs.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple line chart with multiple series. ggplot requires this type of chart to be in </span></span>
+<span id="cb69-2"><a href="graphs.html#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   long format. melt() is the data.table function for converting to long</span></span>
+<span id="cb69-3"><a href="graphs.html#cb69-3" aria-hidden="true" tabindex="-1"></a>plotdata2 <span class="ot">&lt;-</span> <span class="fu">copy</span>(plotdata) <span class="sc">%&gt;%</span></span>
+<span id="cb69-4"><a href="graphs.html#cb69-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">melt</span>(<span class="at">id.vars=</span><span class="st">&#39;year&#39;</span>, <span class="at">variable.name=</span><span class="st">&#39;var&#39;</span>, <span class="at">value.name=</span><span class="st">&#39;val&#39;</span>) </span>
+<span id="cb69-5"><a href="graphs.html#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plotdata2, <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>val, <span class="at">group=</span>var, <span class="at">colour=</span>var)) <span class="sc">+</span> </span>
+<span id="cb69-6"><a href="graphs.html#cb69-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-54-5.png" width="672" /></p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="graphs.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Similar chart but with more features.</span></span>
+<span id="cb70-2"><a href="graphs.html#cb70-2" aria-hidden="true" tabindex="-1"></a>plotdata <span class="ot">&lt;-</span> <span class="fu">copy</span>(iris)</span>
+<span id="cb70-3"><a href="graphs.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plotdata, <span class="fu">aes</span>(<span class="at">x=</span>Petal.Length, <span class="at">y=</span>Petal.Width, </span>
+<span id="cb70-4"><a href="graphs.html#cb70-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">colour=</span>Species)) <span class="sc">+</span>  <span class="co"># Colour specifies the variable to set colour by</span></span>
+<span id="cb70-5"><a href="graphs.html#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  <span class="co"># Add points to the graph (based on the aesthetics provided above)</span></span>
+<span id="cb70-6"><a href="graphs.html#cb70-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">ratio =</span> <span class="dv">1</span>) <span class="sc">+</span>  <span class="co"># Force x and y axes to have the same scale</span></span>
+<span id="cb70-7"><a href="graphs.html#cb70-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">2.5</span>)) <span class="sc">+</span>  <span class="co"># y axis limits</span></span>
+<span id="cb70-8"><a href="graphs.html#cb70-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">7</span>),  <span class="co"># x axis limits</span></span>
+<span id="cb70-9"><a href="graphs.html#cb70-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>),  <span class="co"># Location of x ticks</span></span>
+<span id="cb70-10"><a href="graphs.html#cb70-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&#39;one&#39;</span>, <span class="st">&#39;three&#39;</span>, <span class="st">&#39;five&#39;</span>, <span class="st">&#39;seven&#39;</span>)) <span class="sc">+</span>  <span class="co"># x tick labels</span></span>
+<span id="cb70-11"><a href="graphs.html#cb70-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>) <span class="sc">+</span>  <span class="co"># Add horizontal line at zero</span></span>
+<span id="cb70-12"><a href="graphs.html#cb70-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">x=</span><span class="dv">0</span>, <span class="at">y=</span><span class="dv">0</span>, <span class="at">xend=</span><span class="dv">7</span>, <span class="at">yend=</span><span class="dv">7</span>, <span class="at">colour=</span><span class="st">&#39;black&#39;</span>, <span class="at">linetype=</span><span class="dv">2</span>) <span class="sc">+</span>  <span class="co"># Manually add line</span></span>
+<span id="cb70-13"><a href="graphs.html#cb70-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&#39;text&#39;</span>, <span class="at">x=</span><span class="dv">1</span>, <span class="at">y=</span><span class="fl">1.8</span>, <span class="at">label=</span><span class="st">&#39;Equality line&#39;</span>, </span>
+<span id="cb70-14"><a href="graphs.html#cb70-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour=</span><span class="st">&#39;black&#39;</span>) <span class="sc">+</span>  <span class="co"># Manually add text</span></span>
+<span id="cb70-15"><a href="graphs.html#cb70-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&#39;Iris data graph with lots of unnecessary features</span><span class="sc">\n</span><span class="st">Including a 2-line title&#39;</span>) <span class="sc">+</span> </span>
+<span id="cb70-16"><a href="graphs.html#cb70-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&#39;Width&#39;</span>,  <span class="co"># y axis label</span></span>
+<span id="cb70-17"><a href="graphs.html#cb70-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&#39;Length&#39;</span>,  <span class="co"># x axis label</span></span>
+<span id="cb70-18"><a href="graphs.html#cb70-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour=</span><span class="st">&#39;Species column&#39;</span>) <span class="sc">+</span>  <span class="co"># legend label (use &#39;&#39; for blank)</span></span>
+<span id="cb70-19"><a href="graphs.html#cb70-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&#39;bottom&#39;</span>)  <span class="co"># Default is legend on right side; this moves it.</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-54-6.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-table-and-magrittr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="coming-soon.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

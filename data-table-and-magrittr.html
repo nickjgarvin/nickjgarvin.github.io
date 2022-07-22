@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 The data.table and magrittr packages | R Tools for Quantitative Data Analysis</title>
+  <meta name="description" content="Chapter 5 The data.table and magrittr packages | R Tools for Quantitative Data Analysis" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 The data.table and magrittr packages | R Tools for Quantitative Data Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 The data.table and magrittr packages | R Tools for Quantitative Data Analysis" />
+  
+  
+  
+
+<meta name="author" content="Nick Garvin" />
+
+
+<meta name="date" content="2022-06-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="functions.html"/>
+<link rel="next" href="graphs.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://glowing-blancmange-f08364.netlify.app/index.html">R Tools for Quantitative Data Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#getting-started-what-is"><i class="fa fa-check"></i><b>1.1</b> What is a line of R code?</a></li>
+<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#coding-style"><i class="fa fa-check"></i><b>1.2</b> Coding style</a></li>
+<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#getting-started-packages"><i class="fa fa-check"></i><b>1.3</b> Base R and installing packages</a></li>
+<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#example-code-to-play-with"><i class="fa fa-check"></i><b>1.4</b> Example code to play with</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="object-types.html"><a href="object-types.html"><i class="fa fa-check"></i><b>2</b> Types of data objects</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="object-types.html"><a href="object-types.html#vectors"><i class="fa fa-check"></i><b>2.1</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="object-types.html"><a href="object-types.html#numeric-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Numeric vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="object-types.html"><a href="object-types.html#character-vectors"><i class="fa fa-check"></i><b>2.1.2</b> Character vectors</a></li>
+<li class="chapter" data-level="2.1.3" data-path="object-types.html"><a href="object-types.html#factor-vectors"><i class="fa fa-check"></i><b>2.1.3</b> Factor vectors</a></li>
+<li class="chapter" data-level="2.1.4" data-path="object-types.html"><a href="object-types.html#logical-vectors"><i class="fa fa-check"></i><b>2.1.4</b> Logical vectors</a></li>
+<li class="chapter" data-level="2.1.5" data-path="object-types.html"><a href="object-types.html#date-vectors"><i class="fa fa-check"></i><b>2.1.5</b> Date vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="object-types.html"><a href="object-types.html#vector-operations-and-indexing"><i class="fa fa-check"></i><b>2.2</b> Vector operations and indexing</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="object-types.html"><a href="object-types.html#object-types-vector-wise"><i class="fa fa-check"></i><b>2.2.1</b> Vector-wise operations and recycling</a></li>
+<li class="chapter" data-level="2.2.2" data-path="object-types.html"><a href="object-types.html#named-vector-elements"><i class="fa fa-check"></i><b>2.2.2</b> Named vector elements</a></li>
+<li class="chapter" data-level="2.2.3" data-path="object-types.html"><a href="object-types.html#how-to-index-vectors"><i class="fa fa-check"></i><b>2.2.3</b> How to index vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="object-types.html"><a href="object-types.html#arrays"><i class="fa fa-check"></i><b>2.3</b> Arrays</a></li>
+<li class="chapter" data-level="2.4" data-path="object-types.html"><a href="object-types.html#data-frames"><i class="fa fa-check"></i><b>2.4</b> Data frames</a></li>
+<li class="chapter" data-level="2.5" data-path="object-types.html"><a href="object-types.html#lists"><i class="fa fa-check"></i><b>2.5</b> Lists</a></li>
+<li class="chapter" data-level="2.6" data-path="object-types.html"><a href="object-types.html#if-statements-and-for-loops"><i class="fa fa-check"></i><b>2.6</b> ‘If’ statements and ‘for’ loops</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="object-types.html"><a href="object-types.html#if-statements"><i class="fa fa-check"></i><b>2.6.1</b> If statements</a></li>
+<li class="chapter" data-level="2.6.2" data-path="object-types.html"><a href="object-types.html#object-types-loops"><i class="fa fa-check"></i><b>2.6.2</b> For loops</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="object-types.html"><a href="object-types.html#recap"><i class="fa fa-check"></i><b>2.7</b> Recap</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="obtaining-data.html"><a href="obtaining-data.html"><i class="fa fa-check"></i><b>3</b> Obtaining data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="obtaining-data.html"><a href="obtaining-data.html#common-functions-for-importing-data"><i class="fa fa-check"></i><b>3.1</b> Common functions for importing data</a></li>
+<li class="chapter" data-level="3.2" data-path="obtaining-data.html"><a href="obtaining-data.html#where-to-save-data"><i class="fa fa-check"></i><b>3.2</b> Where to save data</a></li>
+<li class="chapter" data-level="3.3" data-path="obtaining-data.html"><a href="obtaining-data.html#import-data-projects"><i class="fa fa-check"></i><b>3.3</b> Setting up an RStudio project</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="obtaining-data.html"><a href="obtaining-data.html#when-to-use-packages-instead-of-projects"><i class="fa fa-check"></i><b>3.3.1</b> When to use packages instead of projects</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>4</b> Functions (and environments)</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="functions.html"><a href="functions.html#functions-user-defined-functions"><i class="fa fa-check"></i><b>4.1</b> How to write functions</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="functions.html"><a href="functions.html#why-put-your-operations-inside-user-defined-functions"><i class="fa fa-check"></i><b>4.1.1</b> Why put your operations inside user-defined functions?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="functions.html"><a href="functions.html#functions-environments"><i class="fa fa-check"></i><b>4.2</b> Environments</a></li>
+<li class="chapter" data-level="4.3" data-path="functions.html"><a href="functions.html#functions-apply"><i class="fa fa-check"></i><b>4.3</b> Applying functions repeatedly</a></li>
+<li class="chapter" data-level="4.4" data-path="functions.html"><a href="functions.html#debugging-user-defined-functions"><i class="fa fa-check"></i><b>4.4</b> Debugging user-defined functions</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="functions.html"><a href="functions.html#the-browser-function"><i class="fa fa-check"></i><b>4.4.1</b> The browser() function</a></li>
+<li class="chapter" data-level="4.4.2" data-path="functions.html"><a href="functions.html#the-errorrecover-setting"><i class="fa fa-check"></i><b>4.4.2</b> The error=recover setting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html"><i class="fa fa-check"></i><b>5</b> The data.table and magrittr packages</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#first-load-the-two-packages"><i class="fa fa-check"></i><b>5.1</b> First load the two packages</a></li>
+<li class="chapter" data-level="5.2" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#the-magrittr-package-aka-pipes"><i class="fa fa-check"></i><b>5.2</b> The magrittr package, AKA pipes</a></li>
+<li class="chapter" data-level="5.3" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#the-data.table-package"><i class="fa fa-check"></i><b>5.3</b> The data.table package</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-index-shortcuts"><i class="fa fa-check"></i><b>5.3.1</b> Row and column indexing utilises shortcuts</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-assignment"><i class="fa fa-check"></i><b>5.3.2</b> The in-place assignment operator <code>:=</code></a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-by"><i class="fa fa-check"></i><b>5.3.3</b> Operations <u>by groups</u> of rows</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-functions"><i class="fa fa-check"></i><b>5.3.4</b> Handy data.table functions</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-magrittr"><i class="fa fa-check"></i><b>5.4</b> Combining data.table and magrittr</a></li>
+<li class="chapter" data-level="5.5" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#packages-why-not-dplyr"><i class="fa fa-check"></i><b>5.5</b> Why data.table rather than dplyr here</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="graphs.html"><a href="graphs.html"><i class="fa fa-check"></i><b>6</b> Graphs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="graphs.html"><a href="graphs.html#base-r-or-ggplot"><i class="fa fa-check"></i><b>6.1</b> Base R or ggplot?</a></li>
+<li class="chapter" data-level="6.2" data-path="graphs.html"><a href="graphs.html#base-r-graph-examples"><i class="fa fa-check"></i><b>6.2</b> Base R graph examples</a></li>
+<li class="chapter" data-level="6.3" data-path="graphs.html"><a href="graphs.html#ggplot-graph-examples"><i class="fa fa-check"></i><b>6.3</b> ggplot graph examples</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="coming-soon.html"><a href="coming-soon.html"><i class="fa fa-check"></i><b>7</b> Coming soon</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="coming-soon.html"><a href="coming-soon.html#workflow"><i class="fa fa-check"></i><b>7.1</b> Workflow</a></li>
+<li class="chapter" data-level="7.2" data-path="coming-soon.html"><a href="coming-soon.html#good-habits"><i class="fa fa-check"></i><b>7.2</b> Good habits</a></li>
+<li class="chapter" data-level="7.3" data-path="coming-soon.html"><a href="coming-soon.html#better-examples"><i class="fa fa-check"></i><b>7.3</b> Better examples</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Tools for Quantitative Data Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-table-and-magrittr" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> The data.table and magrittr packages<a href="data-table-and-magrittr.html#data-table-and-magrittr" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This section covers two particularly useful packages: data.table and magrittr.</p>
+<p><strong>The data.table package</strong> brings in functionality, speed and neatness for working on datasets.</p>
+<p><strong>The magrittr package</strong> allows you to write your functions inside out, which makes it easy and neat to run a sequence of operations on a dataset in one go.</p>
+<div id="first-load-the-two-packages" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> First load the two packages<a href="data-table-and-magrittr.html#first-load-the-two-packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The code in the rest of this section assumes that you have data.table and magrittr loaded. If you haven’t installed them already, or if you’re not sure, run:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-table-and-magrittr.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&#39;magrittr&#39;</span>, <span class="st">&#39;data.table&#39;</span>))</span></code></pre></div>
+<p>Now, whether you’ve loaded them in the past or not, load them into your <em>current</em> session by running:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="data-table-and-magrittr.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb27-2"><a href="data-table-and-magrittr.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span></code></pre></div>
+</div>
+<div id="the-magrittr-package-aka-pipes" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> The magrittr package, AKA pipes<a href="data-table-and-magrittr.html#the-magrittr-package-aka-pipes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The magrittr packages brings in the <strong>pipe operator</strong> <code>%&gt;%</code>. It does one thing: permits a function argument to be written before the function, to make your code look nicer. For example:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data-table-and-magrittr.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(cars<span class="sc">$</span>speed)  <span class="co"># Calling &#39;unique()&#39; the usual way</span></span>
+<span id="cb28-2"><a href="data-table-and-magrittr.html#cb28-2" aria-hidden="true" tabindex="-1"></a>cars<span class="sc">$</span>speed <span class="sc">%&gt;%</span> <span class="fu">unique</span>() <span class="co"># The pipes way. Gives exactly the same result.</span></span></code></pre></div>
+<p>It works on any number of nested functions, and reads from left to right, so the result from calling one function is the argument in the next:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="data-table-and-magrittr.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(<span class="fu">unique</span>(cars<span class="sc">$</span>speed))</span>
+<span id="cb29-2"><a href="data-table-and-magrittr.html#cb29-2" aria-hidden="true" tabindex="-1"></a>cars<span class="sc">$</span>speed <span class="sc">%&gt;%</span> unique <span class="sc">%&gt;%</span> median  <span class="co"># Brackets after the function names are not necessary</span></span></code></pre></div>
+<p>You can feed other arguments into the functions:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="data-table-and-magrittr.html#cb30-1" aria-hidden="true" tabindex="-1"></a>cars<span class="sc">$</span>speed <span class="sc">%&gt;%</span> <span class="fu">unique</span>(<span class="at">incomparables=</span><span class="fu">c</span>(<span class="dv">24</span>)) <span class="sc">%&gt;%</span> median</span></code></pre></div>
+<p>By default, the object to the left of <code>%&gt;%</code> is the <em>first</em> argument in the function to the right, but it does not need to be. Just use a dot <code>.</code> to state which argument you want it to be:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="data-table-and-magrittr.html#cb31-1" aria-hidden="true" tabindex="-1"></a>cars<span class="sc">$</span>speed <span class="sc">%&gt;%</span> unique <span class="sc">%&gt;%</span> median <span class="sc">%&gt;%</span> <span class="fu">c</span>(<span class="dv">1</span>, .)</span></code></pre></div>
+<p>These examples feed a vector through the pipes, but pipes worth with any type of data object. Pipes with data tables are discussed in section <a href="data-table-and-magrittr.html#data-table-magrittr">5.4</a>.</p>
+</div>
+<div id="the-data.table-package" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> The data.table package<a href="data-table-and-magrittr.html#the-data.table-package" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The data.table package introduces a new object type, called a data table, that is an extension of a data frame. It adds functionality, reduces the amount of code required, and executes code faster than other types of data frames. Syntactically, the main difference from base R is that more things can be done inside the index operators <code>[]</code>. It also introduces a new type of assignment operator <code>:=</code> for use inside the index operators.</p>
+<p>A benefit of data.table is that its help documentation is relatively thorough and easy to find:</p>
+<ul>
+<li>The description of arguments in the help file (see <code>?data.table</code>) provides detailed information on what can be done inside <code>[]</code>.</li>
+<li>The data.table FAQ page is good: <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-faq.html" class="uri">https://cran.r-project.org/web/packages/data.table/vignettes/datatable-faq.html</a>.</li>
+</ul>
+<p>Most things that work on data frames also work on data tables. The following lists some of the main additional features of data tables. There is additional handy information here: <a href="https://riptutorial.com/data-table" class="uri">https://riptutorial.com/data-table</a>.</p>
+<div id="data-table-index-shortcuts" class="section level3 hasAnchor" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Row and column indexing utilises shortcuts<a href="data-table-and-magrittr.html#data-table-index-shortcuts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Inside index operators <code>[]</code>, data tables recognise columns as separate named objects.</strong></p>
+<p>To index particular rows based on values in a column, data frames require writing (for example) <code>dataframe[dataframe$col1 &gt; 2, ]</code>, whereas data tables accept <code>datatable[col1 &gt; 2, ]</code>. This makes the code shorter (always a good thing), and easier to read and write.</p>
+<p>Here’s a more reproduceable example. It selects all rows from the iris dataset that have species equal to setosa and sepal length above 5.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="data-table-and-magrittr.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up data frame and data table to compare.</span></span>
+<span id="cb32-2"><a href="data-table-and-magrittr.html#cb32-2" aria-hidden="true" tabindex="-1"></a>dataframe1 <span class="ot">&lt;-</span> iris</span>
+<span id="cb32-3"><a href="data-table-and-magrittr.html#cb32-3" aria-hidden="true" tabindex="-1"></a>datatable1 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>(iris)</span>
+<span id="cb32-4"><a href="data-table-and-magrittr.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dataframe1)</span>
+<span id="cb32-5"><a href="data-table-and-magrittr.html#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(datatable1)</span>
+<span id="cb32-6"><a href="data-table-and-magrittr.html#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="data-table-and-magrittr.html#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="do">### Demonstration of data.table column recognition by name</span></span>
+<span id="cb32-8"><a href="data-table-and-magrittr.html#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># The data frame way. To create the logical vector/s for indexing the desired rows, </span></span>
+<span id="cb32-9"><a href="data-table-and-magrittr.html#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   the columns being conditioned on must first be extracted as a vector, with $.</span></span>
+<span id="cb32-10"><a href="data-table-and-magrittr.html#cb32-10" aria-hidden="true" tabindex="-1"></a>result_df <span class="ot">&lt;-</span> dataframe1[dataframe1<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">&#39;setosa&#39;</span> <span class="sc">&amp;</span> dataframe1<span class="sc">$</span>Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>, ]</span>
+<span id="cb32-11"><a href="data-table-and-magrittr.html#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co"># The following doesn&#39;t work, because Species and Sepal.Length are not themselves </span></span>
+<span id="cb32-12"><a href="data-table-and-magrittr.html#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   objects available in the environment.</span></span>
+<span id="cb32-13"><a href="data-table-and-magrittr.html#cb32-13" aria-hidden="true" tabindex="-1"></a>result_df <span class="ot">&lt;-</span> dataframe1[Species <span class="sc">==</span> <span class="st">&#39;setosa&#39;</span> <span class="sc">&amp;</span> Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>, ]</span>
+<span id="cb32-14"><a href="data-table-and-magrittr.html#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="co"># The data table way. Inside [], columns are recognised as their own named objects.</span></span>
+<span id="cb32-15"><a href="data-table-and-magrittr.html#cb32-15" aria-hidden="true" tabindex="-1"></a>result_dt <span class="ot">&lt;-</span> datatable1[Species <span class="sc">==</span> <span class="st">&#39;setosa&#39;</span> <span class="sc">&amp;</span> Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>, ] </span></code></pre></div>
+<p><strong>The way it works</strong> is that data.table basically opens its own local environment within the index operators <code>[]</code>. In this local environment, columns are recognised as objects.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="data-table-and-magrittr.html#cb33-1" aria-hidden="true" tabindex="-1"></a>dataframe1 <span class="ot">&lt;-</span> iris</span>
+<span id="cb33-2"><a href="data-table-and-magrittr.html#cb33-2" aria-hidden="true" tabindex="-1"></a>datatable1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb33-3"><a href="data-table-and-magrittr.html#cb33-3" aria-hidden="true" tabindex="-1"></a>Sepal.Length <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">100</span>, <span class="fu">nrow</span>(iris))  <span class="co"># Put object with same column name in global env.</span></span>
+<span id="cb33-4"><a href="data-table-and-magrittr.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dataframe1[Sepal.Length <span class="sc">==</span> <span class="dv">100</span>, ])  <span class="co"># Data frame uses that object</span></span>
+<span id="cb33-5"><a href="data-table-and-magrittr.html#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(datatable1[Sepal.Length <span class="sc">==</span> <span class="dv">100</span>])  <span class="co"># Data table follows the environment hierarchy, </span></span>
+<span id="cb33-6"><a href="data-table-and-magrittr.html#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   by first looking for (and finding) Sepal.Length inside [].</span></span>
+<span id="cb33-7"><a href="data-table-and-magrittr.html#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that when there&#39;s no argument after the comma in [, ], data.table lets you omit it</span></span></code></pre></div>
+<p><strong>Columns are treated like a list of vectors</strong></p>
+<p>Similar to indexing rows, when indexing columns, the column names do not need to be provided as strings. The columns are recognised as objects.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="data-table-and-magrittr.html#cb34-1" aria-hidden="true" tabindex="-1"></a>dataframe1 <span class="ot">&lt;-</span> iris</span>
+<span id="cb34-2"><a href="data-table-and-magrittr.html#cb34-2" aria-hidden="true" tabindex="-1"></a>datatable1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb34-3"><a href="data-table-and-magrittr.html#cb34-3" aria-hidden="true" tabindex="-1"></a>dataframe1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="st">&#39;Species&#39;</span>]</span>
+<span id="cb34-4"><a href="data-table-and-magrittr.html#cb34-4" aria-hidden="true" tabindex="-1"></a>dataframe1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, Species]</span>
+<span id="cb34-5"><a href="data-table-and-magrittr.html#cb34-5" aria-hidden="true" tabindex="-1"></a>datatable1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, Species]</span></code></pre></div>
+<p>The indexing above extracts the data table column and provides it as a vector. To retain the data table structure, write the column names inside a list. The list can include any number of columns.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="data-table-and-magrittr.html#cb35-1" aria-hidden="true" tabindex="-1"></a>datatable1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb35-2"><a href="data-table-and-magrittr.html#cb35-2" aria-hidden="true" tabindex="-1"></a>datatable1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">list</span>(Species)]</span>
+<span id="cb35-3"><a href="data-table-and-magrittr.html#cb35-3" aria-hidden="true" tabindex="-1"></a>datatable1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">list</span>(Species, Sepal.Length)]</span>
+<span id="cb35-4"><a href="data-table-and-magrittr.html#cb35-4" aria-hidden="true" tabindex="-1"></a>datatable1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, .(Species, Sepal.Length)]  <span class="co"># data.table&#39;s [] recognise . as short for list</span></span></code></pre></div>
+<p>Data table’s default column indexing does not always allow indexing columns with a logical vector. You may want to use this kind of indexing if you’re systematic about how you name your columns. To get it to work with a data table, set data.table’s <code>with</code> argument to <code>FALSE</code>. This makes the data table more like a data frame by switching off the way it treats <code>[]</code> as its own local environment.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="data-table-and-magrittr.html#cb36-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> iris</span>
+<span id="cb36-2"><a href="data-table-and-magrittr.html#cb36-2" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb36-3"><a href="data-table-and-magrittr.html#cb36-3" aria-hidden="true" tabindex="-1"></a>df1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">grepl</span>(<span class="st">&#39;Sepal.&#39;</span>, <span class="fu">colnames</span>(df1))]  <span class="co"># Pull out columns with &#39;Sepal.&#39; in name</span></span>
+<span id="cb36-4"><a href="data-table-and-magrittr.html#cb36-4" aria-hidden="true" tabindex="-1"></a>dt1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">grepl</span>(<span class="st">&#39;Sepal.&#39;</span>, <span class="fu">colnames</span>(dt1))]  <span class="co"># Doesn&#39;t work properly by default in data.table</span></span>
+<span id="cb36-5"><a href="data-table-and-magrittr.html#cb36-5" aria-hidden="true" tabindex="-1"></a>dt1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">grepl</span>(<span class="st">&#39;Sepal.&#39;</span>, <span class="fu">colnames</span>(dt1)), with<span class="ot">=</span><span class="cn">FALSE</span>]  <span class="co"># Does now.</span></span></code></pre></div>
+</div>
+<div id="data-table-assignment" class="section level3 hasAnchor" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> The in-place assignment operator <code>:=</code><a href="data-table-and-magrittr.html#data-table-assignment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><u>Data.table’s <code>:=</code> operator adds columns quickly</u>. It is probably the largest deviation from base R syntax, because the standard assignment operator <code>&lt;-</code> is such a fundamental piece of R code. In-place assignment is used after the first comma in the indexing operator <code>[]</code> (i.e. ‘j’ in the help file).</p>
+<p>The <code>:=</code> operator never removes existing columns. It either overwrites existing columns, if the name/s provided to the left are pre-existing columns, or adds new ones, if the name/s are not.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="data-table-and-magrittr.html#cb37-1" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb37-2"><a href="data-table-and-magrittr.html#cb37-2" aria-hidden="true" tabindex="-1"></a>dt1[, sepal_area <span class="sc">:</span><span class="er">=</span> Sepal.Length <span class="sc">*</span> Sepal.Width]</span>
+<span id="cb37-3"><a href="data-table-and-magrittr.html#cb37-3" aria-hidden="true" tabindex="-1"></a>dt1</span></code></pre></div>
+<p>To add multiple columns, provide the new columns in a list, and assign them to a character vector of new column names:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="data-table-and-magrittr.html#cb38-1" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb38-2"><a href="data-table-and-magrittr.html#cb38-2" aria-hidden="true" tabindex="-1"></a>dt1[, <span class="fu">c</span>(<span class="st">&#39;sepal_area&#39;</span>, <span class="st">&#39;petal_area&#39;</span>) <span class="sc">:</span><span class="er">=</span> </span>
+<span id="cb38-3"><a href="data-table-and-magrittr.html#cb38-3" aria-hidden="true" tabindex="-1"></a>      .(Sepal.Length <span class="sc">*</span> Sepal.Width, Petal.Length <span class="sc">*</span> Petal.Width)]</span>
+<span id="cb38-4"><a href="data-table-and-magrittr.html#cb38-4" aria-hidden="true" tabindex="-1"></a>dt1</span></code></pre></div>
+<p>Since <code>:=</code> never removes existing columns, if the new column assigned is not as long as existing columns, it will be recycled to make it fit.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="data-table-and-magrittr.html#cb39-1" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb39-2"><a href="data-table-and-magrittr.html#cb39-2" aria-hidden="true" tabindex="-1"></a>dt1[, avg_sepal_length <span class="sc">:</span><span class="er">=</span> <span class="fu">mean</span>(Sepal.Length)]</span>
+<span id="cb39-3"><a href="data-table-and-magrittr.html#cb39-3" aria-hidden="true" tabindex="-1"></a>dt1</span></code></pre></div>
+<p><strong>In-place assignment brings significant speed benefits</strong></p>
+<p>When an object is modified by using <code>&lt;-</code> to change some part of it, the assignment works by creating a whole new version of that object. The new version takes up a new space in memory, in addition to the previous version of the object. In-place assignment, on the other hand, is more memory efficient because it modifies the existing object in memory rather than creating a new one.</p>
+<p>The code below uses the <code>tracemem()</code> function to show the memory addresses of the object versions as assignment takes place. The long hexademical number displayed inside ‘&lt;&gt;’ is the memory address.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="data-table-and-magrittr.html#cb40-1" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>(iris)</span>
+<span id="cb40-2"><a href="data-table-and-magrittr.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(dt1)</span>
+<span id="cb40-3"><a href="data-table-and-magrittr.html#cb40-3" aria-hidden="true" tabindex="-1"></a>dt1<span class="sc">$</span>new_col <span class="ot">&lt;-</span> dt1<span class="sc">$</span>Sepal.Lenth <span class="sc">+</span> dt1<span class="sc">$</span>Sepal.Width</span>
+<span id="cb40-4"><a href="data-table-and-magrittr.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(dt1)  <span class="co"># Standard assignment created a new memory location</span></span>
+<span id="cb40-5"><a href="data-table-and-magrittr.html#cb40-5" aria-hidden="true" tabindex="-1"></a>dt2 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>(iris)</span>
+<span id="cb40-6"><a href="data-table-and-magrittr.html#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(dt2)</span>
+<span id="cb40-7"><a href="data-table-and-magrittr.html#cb40-7" aria-hidden="true" tabindex="-1"></a>dt2[, new_col <span class="sc">:</span><span class="er">=</span> Sepal.Length <span class="sc">+</span> Sepal.Width]</span>
+<span id="cb40-8"><a href="data-table-and-magrittr.html#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(dt2)  <span class="co"># In-place assignment did not.</span></span>
+<span id="cb40-9"><a href="data-table-and-magrittr.html#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="fu">untracemem</span>(dt1)</span>
+<span id="cb40-10"><a href="data-table-and-magrittr.html#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="fu">untracemem</span>(dt2)</span></code></pre></div>
+<p><strong>Be careful – this can change objects that you may not expect. Use <code>copy()</code> when in doubt.</strong></p>
+<p>It’s easiest to demonstrate this with a simple example:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="data-table-and-magrittr.html#cb41-1" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb41-2"><a href="data-table-and-magrittr.html#cb41-2" aria-hidden="true" tabindex="-1"></a>dt2 <span class="ot">&lt;-</span> dt1</span>
+<span id="cb41-3"><a href="data-table-and-magrittr.html#cb41-3" aria-hidden="true" tabindex="-1"></a>dt2[, Sepal.Length <span class="sc">:</span><span class="er">=</span> <span class="cn">NA</span>]</span>
+<span id="cb41-4"><a href="data-table-and-magrittr.html#cb41-4" aria-hidden="true" tabindex="-1"></a>dt1  <span class="co"># dt1 has also been changed!</span></span></code></pre></div>
+<p>In the example above, the assignment <code>dt2 &lt;- dt1</code> did not take up any new space in memory (run <code>tracemem()</code> on both objects to see this). It did not need to, because it was just giving the object another name. This does not cause any issues when using standard assignment, because as soon as the <code>dt2</code> object is modified, the modified version will be given a new memory address.</p>
+<p>However, because in-place assignment modifies in place, it will modify the object regardless of what other names it has. <u>When in doubt, use <code>copy()</code> to make sure you’re creating a new object</u>, if it could cause problems to modify an existing one.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="data-table-and-magrittr.html#cb42-1" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb42-2"><a href="data-table-and-magrittr.html#cb42-2" aria-hidden="true" tabindex="-1"></a>dt2 <span class="ot">&lt;-</span> <span class="fu">copy</span>(dt1)</span>
+<span id="cb42-3"><a href="data-table-and-magrittr.html#cb42-3" aria-hidden="true" tabindex="-1"></a>dt2</span>
+<span id="cb42-4"><a href="data-table-and-magrittr.html#cb42-4" aria-hidden="true" tabindex="-1"></a>dt2[, Sepal.Length <span class="sc">:</span><span class="er">=</span> <span class="cn">NA</span>]</span>
+<span id="cb42-5"><a href="data-table-and-magrittr.html#cb42-5" aria-hidden="true" tabindex="-1"></a>dt1  <span class="co"># dt1 has not been changed because copy() gave dt2 a new memory address.</span></span></code></pre></div>
+</div>
+<div id="data-table-by" class="section level3 hasAnchor" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> Operations <u>by groups</u> of rows<a href="data-table-and-magrittr.html#data-table-by" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>First, observe how operations work without any row grouping</strong>.</p>
+<p>As we saw in the in-place assignment examples, columns in a data table can be operated on after the comma in the indexing operator <code>[]</code>. When the operations are not combined with assignment, they just return the result of the operations.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="data-table-and-magrittr.html#cb43-1" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb43-2"><a href="data-table-and-magrittr.html#cb43-2" aria-hidden="true" tabindex="-1"></a>dt1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, Sepal.Length <span class="sc">*</span> Sepal.Width]</span></code></pre></div>
+<p>This is true regardless of the length of the vector created by the operation:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="data-table-and-magrittr.html#cb44-1" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb44-2"><a href="data-table-and-magrittr.html#cb44-2" aria-hidden="true" tabindex="-1"></a>dt1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">sum</span>(Sepal.Length <span class="sc">*</span> Sepal.Width)]</span>
+<span id="cb44-3"><a href="data-table-and-magrittr.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that above, the row indexing is done first, so the result of the sum is coming </span></span>
+<span id="cb44-4"><a href="data-table-and-magrittr.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   only from the first five rows of the data table.</span></span>
+<span id="cb44-5"><a href="data-table-and-magrittr.html#cb44-5" aria-hidden="true" tabindex="-1"></a>dt1[, <span class="fu">sum</span>(Sepal.Length <span class="sc">*</span> Sepal.Width)]  <span class="co"># This is using all rows.</span></span></code></pre></div>
+<p><strong>The <u>by</u> argument for grouping</strong>.</p>
+<p>Data tables provide a simple way to perform such operations by groups of rows, the same way that <code>GROUP BY</code> works in SQL.</p>
+<p>For example, the following takes the mean sepal area for each species:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="data-table-and-magrittr.html#cb45-1" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb45-2"><a href="data-table-and-magrittr.html#cb45-2" aria-hidden="true" tabindex="-1"></a>dt1[, <span class="fu">mean</span>(Sepal.Length <span class="sc">*</span> Sepal.Width), by<span class="ot">=</span>Species] </span></code></pre></div>
+<p>To name the column that contains the results, generate it as a named list.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="data-table-and-magrittr.html#cb46-1" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb46-2"><a href="data-table-and-magrittr.html#cb46-2" aria-hidden="true" tabindex="-1"></a>dt1[, .(<span class="at">avg_sepal_area =</span> <span class="fu">mean</span>(Sepal.Length <span class="sc">*</span> Sepal.Width)), by<span class="ot">=</span>Species]</span></code></pre></div>
+<p>This works with multiple different operations, as long as they are grouped by the same column/s.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="data-table-and-magrittr.html#cb47-1" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb47-2"><a href="data-table-and-magrittr.html#cb47-2" aria-hidden="true" tabindex="-1"></a>dt1[, .(<span class="at">avg_sepal_length =</span> <span class="fu">mean</span>(Sepal.Length), </span>
+<span id="cb47-3"><a href="data-table-and-magrittr.html#cb47-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">avg_sepal_area =</span> <span class="fu">mean</span>(Sepal.Length <span class="sc">*</span> Sepal.Width)), </span>
+<span id="cb47-4"><a href="data-table-and-magrittr.html#cb47-4" aria-hidden="true" tabindex="-1"></a>    by<span class="ot">=</span>Species]</span></code></pre></div>
+<p>Operations can be grouped by multiple columns, which makes the grouping more granular. Say we want take take the mean sepal length by species, but take separate means for observations with sepal width above and below the median.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="data-table-and-magrittr.html#cb48-1" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb48-2"><a href="data-table-and-magrittr.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column for above or below median.</span></span>
+<span id="cb48-3"><a href="data-table-and-magrittr.html#cb48-3" aria-hidden="true" tabindex="-1"></a>dt1[, above_med_sepal_width <span class="sc">:</span><span class="er">=</span> Sepal.Length <span class="sc">&gt;</span> <span class="fu">median</span>(Sepal.Length)]</span>
+<span id="cb48-4"><a href="data-table-and-magrittr.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co"># In the line above, the median() collapses the column to a single value, but then </span></span>
+<span id="cb48-5"><a href="data-table-and-magrittr.html#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   comparing it against the Sepal.Length column using `&gt;` means the result is a vector</span></span>
+<span id="cb48-6"><a href="data-table-and-magrittr.html#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   of same length as Sepal.Length.</span></span>
+<span id="cb48-7"><a href="data-table-and-magrittr.html#cb48-7" aria-hidden="true" tabindex="-1"></a>dt1[, .(<span class="at">num_obs =</span> <span class="fu">length</span>(Sepal.Length), </span>
+<span id="cb48-8"><a href="data-table-and-magrittr.html#cb48-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">avg_sepal_area =</span> <span class="fu">mean</span>(Sepal.Length <span class="sc">*</span> Sepal.Width)), </span>
+<span id="cb48-9"><a href="data-table-and-magrittr.html#cb48-9" aria-hidden="true" tabindex="-1"></a>    by<span class="ot">=</span>.(Species, above_med_sepal_width)]</span></code></pre></div>
+<p>With in-place assignment, similar to if there’s no grouping, the results are repeated to match the length of the existing columns.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="data-table-and-magrittr.html#cb49-1" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb49-2"><a href="data-table-and-magrittr.html#cb49-2" aria-hidden="true" tabindex="-1"></a>dt1[, avg_sepal_area <span class="sc">:</span><span class="er">=</span> <span class="fu">mean</span>(Sepal.Length <span class="sc">*</span> Sepal.Width), by<span class="ot">=</span>Species]</span>
+<span id="cb49-3"><a href="data-table-and-magrittr.html#cb49-3" aria-hidden="true" tabindex="-1"></a>dt1</span></code></pre></div>
+</div>
+<div id="data-table-functions" class="section level3 hasAnchor" number="5.3.4">
+<h3><span class="header-section-number">5.3.4</span> Handy data.table functions<a href="data-table-and-magrittr.html#data-table-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The data.table package also introduces many useful functions, and modifications of existing base R functions that are specifically designed for use on data tables. Some of the most useful of these include:</p>
+<ul>
+<li><code>melt()</code>. Reshapes a data table from ‘wide’ to ‘long’.</li>
+<li><code>dcast()</code>. Reshapes a data table from ‘long’ to ‘wide’</li>
+<li><code>setkey()</code>. Orders a data table by the specified variables and makes subsequent ‘grouped’ operaitons faster.</li>
+<li><code>merge()</code>. Joins two data tables with different variables, based on specified common variables (similar to <code>JOIN</code> in SQL).</li>
+<li><code>rbind()</code>. Short for ‘row bind’, joins two data tables with the same variables, by putting one underneath the other.</li>
+<li><code>fifelse()</code>. Vectorised ‘if’ function – does operations to only selected elements of a vector, with selection based on a logical vector.</li>
+</ul>
+<p>There is plenty more great data.table functionality that hasn’t been covered here. When you want to do something you haven’t learnt, use the help resources list above as well as stack overflow.</p>
+<p>A feature that I commonly use is to use <code>lapply()</code> to apply a function to multiple columns simultaneously (because a data table treats itself as a type of list of columns), and use <code>.SD</code> and <code>.SDcols</code> to specify which columns to operate on.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="data-table-and-magrittr.html#cb50-1" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb50-2"><a href="data-table-and-magrittr.html#cb50-2" aria-hidden="true" tabindex="-1"></a>dt1[, <span class="fu">lapply</span>(.SD, <span class="cf">function</span>(x) x <span class="sc">+</span> <span class="dv">10</span>), .SDcols<span class="ot">=</span><span class="fu">c</span>(<span class="st">&#39;Sepal.Length&#39;</span>, <span class="st">&#39;Sepal.Width&#39;</span>)]</span>
+<span id="cb50-3"><a href="data-table-and-magrittr.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The .SD object tells data.table &#39;do this on a subset of columns&#39;, then the .SDcols</span></span>
+<span id="cb50-4"><a href="data-table-and-magrittr.html#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   argument tells data.table which columns. If you leave out the .SDcols argument, it</span></span>
+<span id="cb50-5"><a href="data-table-and-magrittr.html#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   does it on all columns (or tries to).</span></span>
+<span id="cb50-6"><a href="data-table-and-magrittr.html#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="co"># data.table has several other shorthands like .SD that add functionality and felxibility.</span></span></code></pre></div>
+</div>
+</div>
+<div id="data-table-magrittr" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Combining data.table and magrittr<a href="data-table-and-magrittr.html#data-table-magrittr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The combination of data tables and pipes produces neat, concise and readable code. Each line modifies the data table, either within its index operators <code>[]</code>, or by calling a function on the data table. When using the index operators, the line starts with <code>.[</code>, where the <code>.</code> represents the output from the previous line.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="data-table-and-magrittr.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Consider our earlier assignment of two new columns:</span></span>
+<span id="cb51-2"><a href="data-table-and-magrittr.html#cb51-2" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb51-3"><a href="data-table-and-magrittr.html#cb51-3" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> dt1[, <span class="fu">c</span>(<span class="st">&#39;sepal_area&#39;</span>, <span class="st">&#39;petal_area&#39;</span>) <span class="sc">:</span><span class="er">=</span> </span>
+<span id="cb51-4"><a href="data-table-and-magrittr.html#cb51-4" aria-hidden="true" tabindex="-1"></a>      .(Sepal.Length <span class="sc">*</span> Sepal.Width, Petal.Length <span class="sc">*</span> Petal.Width)]</span>
+<span id="cb51-5"><a href="data-table-and-magrittr.html#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="do">### The data.table and pipes way</span></span>
+<span id="cb51-6"><a href="data-table-and-magrittr.html#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Making more use of pipes we could do the following, which is one line longer, but </span></span>
+<span id="cb51-7"><a href="data-table-and-magrittr.html#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   arguably much easier to read.</span></span>
+<span id="cb51-8"><a href="data-table-and-magrittr.html#cb51-8" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> <span class="fu">copy</span>(iris) <span class="sc">%&gt;%</span>  <span class="co"># Use &#39;copy()&#39; in the first line to avoid modifying iris.</span></span>
+<span id="cb51-9"><a href="data-table-and-magrittr.html#cb51-9" aria-hidden="true" tabindex="-1"></a>  as.data.table <span class="sc">%&gt;%</span></span>
+<span id="cb51-10"><a href="data-table-and-magrittr.html#cb51-10" aria-hidden="true" tabindex="-1"></a>  .[, sepal_area <span class="sc">:</span><span class="er">=</span> Sepal.Length <span class="sc">*</span> Sepal.Width] <span class="sc">%&gt;%</span></span>
+<span id="cb51-11"><a href="data-table-and-magrittr.html#cb51-11" aria-hidden="true" tabindex="-1"></a>  .[, petal_area <span class="sc">:</span><span class="er">=</span> Petal.Length <span class="sc">*</span> Petal.Width]</span>
+<span id="cb51-12"><a href="data-table-and-magrittr.html#cb51-12" aria-hidden="true" tabindex="-1"></a><span class="co"># We can also put functions in the process if we want:</span></span>
+<span id="cb51-13"><a href="data-table-and-magrittr.html#cb51-13" aria-hidden="true" tabindex="-1"></a>dt2 <span class="ot">&lt;-</span> <span class="fu">copy</span>(iris) <span class="sc">%&gt;%</span></span>
+<span id="cb51-14"><a href="data-table-and-magrittr.html#cb51-14" aria-hidden="true" tabindex="-1"></a>  as.data.table <span class="sc">%&gt;%</span></span>
+<span id="cb51-15"><a href="data-table-and-magrittr.html#cb51-15" aria-hidden="true" tabindex="-1"></a>  .[, sepal_area <span class="sc">:</span><span class="er">=</span> Sepal.Length <span class="sc">*</span> Sepal.Width] <span class="sc">%&gt;%</span></span>
+<span id="cb51-16"><a href="data-table-and-magrittr.html#cb51-16" aria-hidden="true" tabindex="-1"></a>  .[, petal_area <span class="sc">:</span><span class="er">=</span> Petal.Length <span class="sc">*</span> Petal.Width] <span class="sc">%&gt;%</span></span>
+<span id="cb51-17"><a href="data-table-and-magrittr.html#cb51-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># In the following line, &#39;.&#39; appears twice to denote the output from the previous line.</span></span>
+<span id="cb51-18"><a href="data-table-and-magrittr.html#cb51-18" aria-hidden="true" tabindex="-1"></a>  .[, obs_num <span class="sc">:</span><span class="er">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(.)] <span class="sc">%&gt;%</span></span>
+<span id="cb51-19"><a href="data-table-and-magrittr.html#cb51-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">melt</span>(<span class="at">id.vars=</span><span class="fu">c</span>(<span class="st">&#39;obs_num&#39;</span>, <span class="st">&#39;Species&#39;</span>)) <span class="sc">%&gt;%</span>  <span class="co"># Reshape to long</span></span>
+<span id="cb51-20"><a href="data-table-and-magrittr.html#cb51-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Say we want to cap all petal_area values at 15:</span></span>
+<span id="cb51-21"><a href="data-table-and-magrittr.html#cb51-21" aria-hidden="true" tabindex="-1"></a>  .[variable <span class="sc">==</span> <span class="st">&#39;petal_area&#39;</span> <span class="sc">&amp;</span> value <span class="sc">&gt;</span> <span class="dv">15</span>, value <span class="sc">:</span><span class="er">=</span> <span class="dv">15</span>]</span>
+<span id="cb51-22"><a href="data-table-and-magrittr.html#cb51-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Careful - sometimes the &#39;.&#39; has different meanings in the same line, for example:</span></span>
+<span id="cb51-23"><a href="data-table-and-magrittr.html#cb51-23" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> <span class="fu">copy</span>(iris) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-24"><a href="data-table-and-magrittr.html#cb51-24" aria-hidden="true" tabindex="-1"></a>  as.data.table <span class="sc">%&gt;%</span></span>
+<span id="cb51-25"><a href="data-table-and-magrittr.html#cb51-25" aria-hidden="true" tabindex="-1"></a>  .[, .(<span class="at">length_dataset =</span> <span class="fu">nrow</span>(.))] </span>
+<span id="cb51-26"><a href="data-table-and-magrittr.html#cb51-26" aria-hidden="true" tabindex="-1"></a><span class="co"># The second &#39;.&#39; above is shorthand for &#39;list()&#39;; the other two are used by %&gt;% to refer</span></span>
+<span id="cb51-27"><a href="data-table-and-magrittr.html#cb51-27" aria-hidden="true" tabindex="-1"></a><span class="co">#   to the output from the previous step.</span></span>
+<span id="cb51-28"><a href="data-table-and-magrittr.html#cb51-28" aria-hidden="true" tabindex="-1"></a><span class="co"># The rule to use: whenever &#39;.&#39; is followed by &#39;(&#39;, data.table is using it as shorthand</span></span>
+<span id="cb51-29"><a href="data-table-and-magrittr.html#cb51-29" aria-hidden="true" tabindex="-1"></a><span class="co">#   for &#39;list()&#39;.</span></span>
+<span id="cb51-30"><a href="data-table-and-magrittr.html#cb51-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-31"><a href="data-table-and-magrittr.html#cb51-31" aria-hidden="true" tabindex="-1"></a><span class="do">### &#39;Piping&#39; data tables without magrittr</span></span>
+<span id="cb51-32"><a href="data-table-and-magrittr.html#cb51-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Turning back to the two-column assignment example, another way in data table is to</span></span>
+<span id="cb51-33"><a href="data-table-and-magrittr.html#cb51-33" aria-hidden="true" tabindex="-1"></a><span class="co">#   chain operations by placing more index operators side by side:</span></span>
+<span id="cb51-34"><a href="data-table-and-magrittr.html#cb51-34" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> as.data.table</span>
+<span id="cb51-35"><a href="data-table-and-magrittr.html#cb51-35" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> dt1[, sepal_area <span class="sc">:</span><span class="er">=</span> Sepal.Length <span class="sc">*</span> Sepal.Width</span>
+<span id="cb51-36"><a href="data-table-and-magrittr.html#cb51-36" aria-hidden="true" tabindex="-1"></a>           ][, petal_area <span class="sc">:</span><span class="er">=</span> Petal.Length <span class="sc">*</span> Petal.Width]</span>
+<span id="cb51-37"><a href="data-table-and-magrittr.html#cb51-37" aria-hidden="true" tabindex="-1"></a><span class="co"># But it&#39;s arguably neater with pipes (and easier to add functions into the process)</span></span></code></pre></div>
+</div>
+<div id="packages-why-not-dplyr" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Why data.table rather than dplyr here<a href="data-table-and-magrittr.html#packages-why-not-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The main alternative to data.table is dplyr, which is the Tidyverse package for working with data frames. The dplyr syntax is again different from base R – but more so and in different ways compared to data.table – so people tend to pick either data.table or dplyr and mostly stick to it. (Although it’s OK to use dplyr and data.table together, and on occasions that makes sense to do.) Many just use what they were first shown. Some choose based on which syntax they find more intuitive. In my experience, detail-oriented people <em>tend to</em> prefer the data.table syntax, due to its flexibility, and big-picture people <em>tend to</em> prefer the dplyr syntax, because it is very neat for what it was built for.</p>
+<p>Some other advantages of each option:</p>
+<ul>
+<li><strong>data.table</strong>: runs faster; no package dependencies (i.e. stable); concise and flexible syntax; closer to base R, so it’s good for modelling (base R is still best for linear algebra); good official help files.</li>
+<li><strong>dplyr</strong>: syntax closer to English (i.e. more words, fewer symbols); function arguments and outputs have consistent formats; lots of online tutorials.</li>
+</ul>
+<p>Both packages are continually having new functionality added to them, and both have an abundance of useful information on Stack Overflow. There is a detailed discussion comparing the two options, with contributions by developers of both packages, in this stack overflow post: <a href="https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly" class="uri">https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly</a>.</p>
+<p>For information on dplyr, see its webpage: <a href="https://dplyr.tidyverse.org/" class="uri">https://dplyr.tidyverse.org/</a>. The linked page mentions five key dplyr functions. The dplyr functions and their data.table equivalents are:</p>
+<ul>
+<li><code>mutate()</code> is done by <code>:=</code> (see section <a href="data-table-and-magrittr.html#data-table-assignment">5.3.2</a>).</li>
+<li><code>select()</code> is done by indexing column names (closer to base R; see section <a href="data-table-and-magrittr.html#data-table-index-shortcuts">5.3.1</a>).</li>
+<li><code>filter()</code> is done by row indexing in <code>[]</code>, as in base R.</li>
+<li><code>summarise()</code> is done with the <code>by</code> argument (see section <a href="data-table-and-magrittr.html#data-table-by">5.3.3</a>).</li>
+<li><code>arrange()</code> can be done with <code>setkey()</code>, <code>setorder()</code>, <code>order()</code>, etc.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="graphs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
