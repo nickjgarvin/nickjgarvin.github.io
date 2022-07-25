@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Sourcing data | R Tools for Quantitative Data Analysis</title>
+  <meta name="description" content="Chapter 3 Sourcing data | R Tools for Quantitative Data Analysis" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Sourcing data | R Tools for Quantitative Data Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Sourcing data | R Tools for Quantitative Data Analysis" />
+  
+  
+  
+
+<meta name="author" content="Nick Garvin" />
+
+
+<meta name="date" content="2022-07-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="object-types.html"/>
+<link rel="next" href="functions.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://glowing-blancmange-f08364.netlify.app/index.html">R Tools for Quantitative Data Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#rstudio"><i class="fa fa-check"></i><b>1.1</b> RStudio</a></li>
+<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#getting-started-packages"><i class="fa fa-check"></i><b>1.2</b> Base R and installing packages</a></li>
+<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#getting-started-what-is"><i class="fa fa-check"></i><b>1.3</b> What is a line of R code?</a></li>
+<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#coding-style"><i class="fa fa-check"></i><b>1.4</b> Coding style</a></li>
+<li class="chapter" data-level="1.5" data-path="getting-started.html"><a href="getting-started.html#example-code-to-play-with"><i class="fa fa-check"></i><b>1.5</b> Example code to play with</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="object-types.html"><a href="object-types.html"><i class="fa fa-check"></i><b>2</b> Types of data objects</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="object-types.html"><a href="object-types.html#vectors"><i class="fa fa-check"></i><b>2.1</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="object-types.html"><a href="object-types.html#numeric-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Numeric vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="object-types.html"><a href="object-types.html#character-vectors"><i class="fa fa-check"></i><b>2.1.2</b> Character vectors</a></li>
+<li class="chapter" data-level="2.1.3" data-path="object-types.html"><a href="object-types.html#factor-vectors"><i class="fa fa-check"></i><b>2.1.3</b> Factor vectors</a></li>
+<li class="chapter" data-level="2.1.4" data-path="object-types.html"><a href="object-types.html#logical-vectors"><i class="fa fa-check"></i><b>2.1.4</b> Logical vectors</a></li>
+<li class="chapter" data-level="2.1.5" data-path="object-types.html"><a href="object-types.html#date-vectors"><i class="fa fa-check"></i><b>2.1.5</b> Date vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="object-types.html"><a href="object-types.html#vector-operations-and-indexing"><i class="fa fa-check"></i><b>2.2</b> Vector operations and indexing</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="object-types.html"><a href="object-types.html#object-types-vector-wise"><i class="fa fa-check"></i><b>2.2.1</b> Vector-wise operations and recycling</a></li>
+<li class="chapter" data-level="2.2.2" data-path="object-types.html"><a href="object-types.html#named-vector-elements"><i class="fa fa-check"></i><b>2.2.2</b> Named vector elements</a></li>
+<li class="chapter" data-level="2.2.3" data-path="object-types.html"><a href="object-types.html#how-to-index-vectors"><i class="fa fa-check"></i><b>2.2.3</b> How to index vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="object-types.html"><a href="object-types.html#arrays"><i class="fa fa-check"></i><b>2.3</b> Arrays</a></li>
+<li class="chapter" data-level="2.4" data-path="object-types.html"><a href="object-types.html#data-frames"><i class="fa fa-check"></i><b>2.4</b> Data frames</a></li>
+<li class="chapter" data-level="2.5" data-path="object-types.html"><a href="object-types.html#lists"><i class="fa fa-check"></i><b>2.5</b> Lists</a></li>
+<li class="chapter" data-level="2.6" data-path="object-types.html"><a href="object-types.html#if-statements-and-for-loops"><i class="fa fa-check"></i><b>2.6</b> ‘If’ statements and ‘for’ loops</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="object-types.html"><a href="object-types.html#if-statements"><i class="fa fa-check"></i><b>2.6.1</b> If statements</a></li>
+<li class="chapter" data-level="2.6.2" data-path="object-types.html"><a href="object-types.html#object-types-loops"><i class="fa fa-check"></i><b>2.6.2</b> For loops</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="object-types.html"><a href="object-types.html#recap"><i class="fa fa-check"></i><b>2.7</b> Recap</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sourcing-data.html"><a href="sourcing-data.html"><i class="fa fa-check"></i><b>3</b> Sourcing data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="sourcing-data.html"><a href="sourcing-data.html#common-functions-for-importing-data"><i class="fa fa-check"></i><b>3.1</b> Common functions for importing data</a></li>
+<li class="chapter" data-level="3.2" data-path="sourcing-data.html"><a href="sourcing-data.html#where-to-save-data"><i class="fa fa-check"></i><b>3.2</b> Where to save data</a></li>
+<li class="chapter" data-level="3.3" data-path="sourcing-data.html"><a href="sourcing-data.html#import-data-projects"><i class="fa fa-check"></i><b>3.3</b> Setting up an RStudio project</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="sourcing-data.html"><a href="sourcing-data.html#when-to-use-packages-instead-of-projects"><i class="fa fa-check"></i><b>3.3.1</b> When to use packages instead of projects</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>4</b> Functions (and environments)</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="functions.html"><a href="functions.html#using-functions"><i class="fa fa-check"></i><b>4.1</b> Using functions</a></li>
+<li class="chapter" data-level="4.2" data-path="functions.html"><a href="functions.html#functions-user-defined-functions"><i class="fa fa-check"></i><b>4.2</b> How to write functions</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="functions.html"><a href="functions.html#why-put-your-operations-inside-user-defined-functions"><i class="fa fa-check"></i><b>4.2.1</b> Why put your operations inside user-defined functions?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="functions.html"><a href="functions.html#functions-environments"><i class="fa fa-check"></i><b>4.3</b> Environments</a></li>
+<li class="chapter" data-level="4.4" data-path="functions.html"><a href="functions.html#functions-apply"><i class="fa fa-check"></i><b>4.4</b> Applying functions repeatedly</a></li>
+<li class="chapter" data-level="4.5" data-path="functions.html"><a href="functions.html#debugging-user-defined-functions"><i class="fa fa-check"></i><b>4.5</b> Debugging user-defined functions</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="functions.html"><a href="functions.html#the-browser-function"><i class="fa fa-check"></i><b>4.5.1</b> The browser() function</a></li>
+<li class="chapter" data-level="4.5.2" data-path="functions.html"><a href="functions.html#the-errorrecover-setting"><i class="fa fa-check"></i><b>4.5.2</b> The error=recover setting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html"><i class="fa fa-check"></i><b>5</b> The data.table and magrittr packages</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#first-load-the-two-packages"><i class="fa fa-check"></i><b>5.1</b> First load the two packages</a></li>
+<li class="chapter" data-level="5.2" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#the-magrittr-package-aka-pipes"><i class="fa fa-check"></i><b>5.2</b> The magrittr package, AKA pipes</a></li>
+<li class="chapter" data-level="5.3" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#the-data.table-package"><i class="fa fa-check"></i><b>5.3</b> The data.table package</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-index-shortcuts"><i class="fa fa-check"></i><b>5.3.1</b> Row and column indexing utilises shortcuts</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-assignment"><i class="fa fa-check"></i><b>5.3.2</b> The in-place assignment operator <code>:=</code></a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-by"><i class="fa fa-check"></i><b>5.3.3</b> Operations <u>by groups</u> of rows</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-functions"><i class="fa fa-check"></i><b>5.3.4</b> Handy data.table functions</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#data-table-magrittr"><i class="fa fa-check"></i><b>5.4</b> Combining data.table and magrittr</a></li>
+<li class="chapter" data-level="5.5" data-path="data-table-and-magrittr.html"><a href="data-table-and-magrittr.html#packages-why-not-dplyr"><i class="fa fa-check"></i><b>5.5</b> Why data.table rather than dplyr here</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="graphs.html"><a href="graphs.html"><i class="fa fa-check"></i><b>6</b> Graphs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="graphs.html"><a href="graphs.html#base-r-or-ggplot"><i class="fa fa-check"></i><b>6.1</b> Base R or ggplot?</a></li>
+<li class="chapter" data-level="6.2" data-path="graphs.html"><a href="graphs.html#base-r-graph-examples"><i class="fa fa-check"></i><b>6.2</b> Base R graph examples</a></li>
+<li class="chapter" data-level="6.3" data-path="graphs.html"><a href="graphs.html#ggplot-graph-examples"><i class="fa fa-check"></i><b>6.3</b> ggplot graph examples</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="coming-soon.html"><a href="coming-soon.html"><i class="fa fa-check"></i><b>7</b> Coming soon</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="coming-soon.html"><a href="coming-soon.html#workflow"><i class="fa fa-check"></i><b>7.1</b> Workflow</a></li>
+<li class="chapter" data-level="7.2" data-path="coming-soon.html"><a href="coming-soon.html#good-habits"><i class="fa fa-check"></i><b>7.2</b> Good habits</a></li>
+<li class="chapter" data-level="7.3" data-path="coming-soon.html"><a href="coming-soon.html#better-examples"><i class="fa fa-check"></i><b>7.3</b> Better examples</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Tools for Quantitative Data Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sourcing-data" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Sourcing data<a href="sourcing-data.html#sourcing-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Most R data analysis involves working on data that is read from somewhere, such as a local saved file or an online source. This chapter covers ways of reading data, and where to store them.</p>
+<div id="common-functions-for-importing-data" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Common functions for importing data<a href="sourcing-data.html#common-functions-for-importing-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Common functions for importing data include the following. They are all good options. I tend to use <code>fread()</code> for csv files and <code>read.xlsx</code> for Excel files.</p>
+<ul>
+<li><u>read.table()</u> from base R. Reads most types of text files.</li>
+<li><u>read.csv()</u> from base R. A version of read.table() specifically for csv files.</li>
+<li><u>read.xlsx()</u> from the <u>openxlsx package</u>. Reads a worksheet from an excel file, including from an online source (i.e. the location is a website).</li>
+<li><u>fread()</u> from the <u>data.table package</u>. Reads a csv file (and some other file types) in as a data table, much faster than read.csv(). Can read from a local file or an online source. This is usually the best options if speed is an objective.</li>
+<li><u>read_csv()</u> from the <u>readr package</u>, part of Tidyverse. Reads a csv file in as a tibble.</li>
+<li><u>read_excel()</u> from the <u>readxl package</u>, part of Tidyverse. Reads a worksheet of an excel file, in as a tibble. For online sources, <code>openxlsx::read.xlsx()</code> tends to be easier.</li>
+</ul>
+<p><b>To save data</b> from your R session to a local location in a common file format, use the functions above but replace <code>read</code> with <code>write</code>, for example, <code>write.csv()</code> or <code>fwrite()</code>.</p>
+<p><b>To save R objects for use in a later R session</b>, read and write them as a ‘.rds’ file type using <code>readRDS</code> and <code>writeRDS</code>.</p>
+</div>
+<div id="where-to-save-data" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Where to save data<a href="sourcing-data.html#where-to-save-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are three options for specifying where to save data:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Bad</strong>: Use <code>setwd()</code> to set a working directory for your R session. R will then treat addresses as subfolders within that directory, so the full address does not need to be written.
+<ul>
+<li>This is generally discouraged because it gives your script an external dependency that reduces the flexibility of your work. For example, others will probably not be able to run your code on their machine.</li>
+</ul></li>
+<li><strong>Good</strong>: Use an <u>RStudio project</u>, which bundles related script/s and files in a self-contained folder that can be moved and run anywhere. R treats the project folder as the working directory regardless of where the project folder is put. R projects are an RStudio feature and are discussed further in section <a href="sourcing-data.html#import-data-projects">3.3</a>.</li>
+<li><strong>Sometimes necessary</strong>: write the full filepath of the location. This is required if you need to write to a specific location on your machine/network.</li>
+</ol>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="sourcing-data.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Reading and writing data from local location</span></span>
+<span id="cb17-2"><a href="sourcing-data.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Gets the location of your script. Just so the example works in this setting.</span></span>
+<span id="cb17-3"><a href="sourcing-data.html#cb17-3" aria-hidden="true" tabindex="-1"></a>local_folder <span class="ot">&lt;-</span> <span class="fu">dirname</span>(rstudioapi<span class="sc">::</span><span class="fu">getSourceEditorContext</span>()<span class="sc">$</span>path)</span>
+<span id="cb17-4"><a href="sourcing-data.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the iris dataset as a local csv file. Double click the saved file to check it&#39;s</span></span>
+<span id="cb17-5"><a href="sourcing-data.html#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   been written.</span></span>
+<span id="cb17-6"><a href="sourcing-data.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(iris, <span class="at">file=</span><span class="fu">paste0</span>(local_folder, <span class="st">&#39;/iris_dataset.csv&#39;</span>), <span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb17-7"><a href="sourcing-data.html#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Read it back into your R session</span></span>
+<span id="cb17-8"><a href="sourcing-data.html#cb17-8" aria-hidden="true" tabindex="-1"></a>iris_dataset <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">paste0</span>(local_folder, <span class="st">&#39;/iris_dataset.csv&#39;</span>))</span>
+<span id="cb17-9"><a href="sourcing-data.html#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(iris_dataset)</span>
+<span id="cb17-10"><a href="sourcing-data.html#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># (Remove the saved file jsut to clean up)</span></span>
+<span id="cb17-11"><a href="sourcing-data.html#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">file.remove</span>(<span class="fu">paste0</span>(local_folder, <span class="st">&#39;/iris_dataset.csv&#39;</span>))</span>
+<span id="cb17-12"><a href="sourcing-data.html#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="do">### Reading data from online</span></span>
+<span id="cb17-13"><a href="sourcing-data.html#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment and run next line if openxlsx package has never been installed</span></span>
+<span id="cb17-14"><a href="sourcing-data.html#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&#39;openxlsx&#39;)</span></span>
+<span id="cb17-15"><a href="sourcing-data.html#cb17-15" aria-hidden="true" tabindex="-1"></a>mysuper_data_locn <span class="ot">&lt;-</span></span>
+<span id="cb17-16"><a href="sourcing-data.html#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&#39;https://www.apra.gov.au/sites/default/files/2022-03/&#39;</span>,</span>
+<span id="cb17-17"><a href="sourcing-data.html#cb17-17" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;Quarterly%20MySuper%20statistics%20September%202019%20-%20December%202021.xlsx&#39;</span>)</span>
+<span id="cb17-18"><a href="sourcing-data.html#cb17-18" aria-hidden="true" tabindex="-1"></a>sheet_name <span class="ot">&lt;-</span> <span class="st">&#39;Table 1a&#39;</span></span>
+<span id="cb17-19"><a href="sourcing-data.html#cb17-19" aria-hidden="true" tabindex="-1"></a>mysuper_data <span class="ot">&lt;-</span> openxlsx<span class="sc">::</span><span class="fu">read.xlsx</span>(<span class="at">xlsxFile=</span>mysuper_data_locn, <span class="at">sheet=</span>sheet_name, </span>
+<span id="cb17-20"><a href="sourcing-data.html#cb17-20" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">startRow=</span><span class="dv">4</span>)</span>
+<span id="cb17-21"><a href="sourcing-data.html#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="co"># These data need to be cleaned (e.g. rows removed, columns renamed) before they&#39;re</span></span>
+<span id="cb17-22"><a href="sourcing-data.html#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   usable. But just look at a bit of it to see that the data pull worked.</span></span>
+<span id="cb17-23"><a href="sourcing-data.html#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mysuper_data)</span>
+<span id="cb17-24"><a href="sourcing-data.html#cb17-24" aria-hidden="true" tabindex="-1"></a>mysuper_data[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+</div>
+<div id="import-data-projects" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Setting up an RStudio project<a href="sourcing-data.html#import-data-projects" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>RStudio projects are suitable for all coding tasks. The project creates a folder for containing the scripts and other files used for that task, such as locally stored datasets. Inside the folder is a .Rproj file that coordinates the project’s files.</p>
+<p>To create an RStudio project:</p>
+<ol style="list-style-type: decimal">
+<li>Open RStudio, click ‘File’, ‘New Project’, ‘New Directory’, then ‘New Project’. Write a name for the project folder (‘Directory name’), then click ‘Browse’ and pick a folder to put the project folder in (anywhere is fine), then click ‘Create Project’.</li>
+<li>The empty project wll open, and the ‘Files’ tab in the ‘Files, Plots, Packages, …’ pane will show no files in the project folder aside from the ‘.Rproj’ file you just created. In a sense this file coordinates the other files in the project.</li>
+<li>Click ctrl + shift + N to open a new script, then click ‘File’ then ‘Save As’ to save it into your project folder and give it a name. It will then appear in the ‘Files’ window.</li>
+<li>The project folder is now the working directory to which any R scripts in that folder reference.</li>
+<li>Move any other files or scripts that are for that task into the project folder.</li>
+</ol>
+<p>The following code works fine in a script in an RStudio project. It puts the data in the project folder then reads it back from the project folder.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="sourcing-data.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Don&#39;t run this code unless you&#39;re in an RStudio project. Not sure where it will put</span></span>
+<span id="cb18-2"><a href="sourcing-data.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">###   the csv file otherwise.</span></span>
+<span id="cb18-3"><a href="sourcing-data.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(iris, <span class="at">file=</span><span class="st">&#39;iris_dataset.csv&#39;</span>, <span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb18-4"><a href="sourcing-data.html#cb18-4" aria-hidden="true" tabindex="-1"></a>iris_dataset <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;iris_dataset.csv&#39;</span>)</span>
+<span id="cb18-5"><a href="sourcing-data.html#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># To delete the file you just created, uncomment and run the next line:</span></span>
+<span id="cb18-6"><a href="sourcing-data.html#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#file.remove(&#39;iris_dataset.csv&#39;)</span></span></code></pre></div>
+<p><strong>A key benefit of RStudio projects</strong> is that it keeps your task self contained. The project will keep working if you move it, including giving it to someone else.</p>
+<div id="when-to-use-packages-instead-of-projects" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> When to use packages instead of projects<a href="sourcing-data.html#when-to-use-packages-instead-of-projects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Creating and working in a package is an alternative to working in a project. A package is a collection of functions intended to be easily shared with others, stored in a self-contained bundle like a project. Packages are useful when the point of your work is to allow others to use your code without having to think about how your code works.</p>
+<p>Keep the option in mind, but as a data analyst, you’ll probably find that most of your work does not fit in that category. Packages are a bit more complicated to set up and use, and impose some requirements on what files and scripts you use, and where you put them. So unless you want the practice, projects are in many cases a more suitable option.</p>
+<p>Sometimes it’s important that the analyst that runs the code has reasonable familiarity with how the code works, in which case a package is unsuitable. A common example is code that comprises a model that has assumptions that would be misapplied if the user does not understand them. In these cases the primary benefit of developing a package – preventing the user from having to deal with the underlying code – turns into a cost.</p>
+<!--
+
+Section heading: Automating data sourcing
+
+If the data being sourced get updated -- e.g. when new time periods become available -- and the coding outputs warrant updating in response, the code should point directly to that source. In other words, use R to grab the data from its source rather than downloading it manually. 
+
+Automating data updates in this ways requires a couple of things:
+
+* The format of the source data does not change with the updates. It will be difficult to make your code robust to updates if this isn't the case.
+* The code is flexible enough to continue to work as intended as the source data get updated. This requires forward thinking about how the processes would be affected by changes to the data.
+    * *Careful*: If something does not work as intended, your results are likely to inherit mistakes and you won't necessarily notice. You can incorporate testing, or write your code to intentionally stop running when it encounters these situations, to prevent this from happening.
+
+
+In other cases, you could manually save a copy of the source data locally and write your code to read that local version. Where you can, <u>save your data in simple text files (e.g. csv)</u> rather than in Excel files. Excel files take up more space and have unnecessary complexity that can make things more difficult.
+
+I often use a middle ground process:
+
+1. Write a setting into your code that allows you to specify whether you want to import from the raw data.
+2. When this setting it switched on, have your code import the source data, potentially do some formatting, and then save it locally.
+3. When the setting is switched off, have your code read from the locally saved dataset.
+4. Switch the setting on each time you want to get the latest update of the source data. 
+5. Have the setting switched off every other time you run your code.
+
+-->
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="object-types.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="functions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

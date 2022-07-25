@@ -1,7 +1,8 @@
 getting-started
+rstudio
+getting-started-packages
 getting-started-what-is
 coding-style
-getting-started-packages
 example-code-to-play-with
 object-types
 vectors
@@ -21,12 +22,13 @@ if-statements-and-for-loops
 if-statements
 object-types-loops
 recap
-obtaining-data
+sourcing-data
 common-functions-for-importing-data
 where-to-save-data
 import-data-projects
 when-to-use-packages-instead-of-projects
 functions
+using-functions
 functions-user-defined-functions
 why-put-your-operations-inside-user-defined-functions
 functions-environments
@@ -52,6 +54,3 @@ coming-soon
 workflow
 good-habits
 better-examples
-outline-of-this-manual
-rstudio
-sourcing-data
